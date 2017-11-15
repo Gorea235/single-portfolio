@@ -8,20 +8,25 @@ NODE_SRC=node/src/
 NODE_SRC_CONF=$(NODE_SRC)tsconfig.node.json
 ETC=etc/
 
-all: build clean-etc
-
+# full build
 build: angular node
-	cp -R $(NODE)* $(OUT)
-	$(BIN)/tsc -p $(NODE_SRC_CONF)
 
-base:
+# npm prerequisite task
+npm-pre:
 	npm install
 
-angular: base
+# node prerequisite task
+node-pre: npm-pre
+	npm install --production --prefix $(NODE)
+
+# angular
+angular: npm-pre
 	$(BIN)/ng build -prod -op $(OUT)
 
-node: base
-	npm install --production --prefix $(NODE)
+node: node-pre
+	test -d $(OUT) || mkdir $(OUT)
+	cp -R $(NODE)* $(OUT)
+	$(BIN)/tsc -p $(NODE_SRC_CONF)
 
 clean: clean-etc
 	rm -Rf $(NODE_M) $(NODE)$(NODE_M)
