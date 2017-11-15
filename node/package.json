@@ -1,0 +1,8 @@
+{
+  "name": "single-portfolio",
+  "version": "0.0.1",
+  "description": "A portfolio website displaying galleries of images for a single person",
+  "main": "app.js",
+  "author": "Luke D",
+  "license": "MIT"
+}
