@@ -1,21 +1,27 @@
 # Builds the angular webserver
 
+BIN=./node_modules/.bin
 OUT=dist/
-NODE=node/
+NODE=node/base/
 NODE_M=node_modules/
+NODE_SRC=node/src/
+NODE_SRC_CONF=$(NODE_SRC)tsconfig.node.json
 ETC=etc/
 
 all: build clean-etc
 
 build: angular node
 	cp -R $(NODE)* $(OUT)
+	$(BIN)/tsc -p $(NODE_SRC_CONF)
 
-angular:
+base:
 	npm install
-	ng build -prod -op $(OUT)
 
-node:
-	npm install --prefix $(NODE)
+angular: base
+	$(BIN)/ng build -prod -op $(OUT)
+
+node: base
+	npm install --production --prefix $(NODE)
 
 clean: clean-etc
 	rm -Rf $(NODE_M) $(NODE)$(NODE_M)

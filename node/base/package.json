@@ -1,0 +1,18 @@
+{
+  "name": "single-portfolio",
+  "version": "0.0.1",
+  "description": "A portfolio website displaying galleries of images for a single person",
+  "main": "app.js",
+  "author": "Luke D",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gorea235/single-portfolio"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "serve-favicon": "^2.4.5"
+  }
+}
