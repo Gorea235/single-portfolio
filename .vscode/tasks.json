@@ -5,22 +5,15 @@
     "tasks": [
         {
             "label": "ng build",
-            "type": "typescript",
-            "tsconfig": "tsconfig.json",
-            "problemMatcher": [
-                "$tsc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "type": "shell",
+            "command": "ng build",
+            "problemMatcher": []
         },
         {
             "label": "ng serve",
             "type": "shell",
             "command": "ng serve",
             "isBackground": true,
-            "dependsOn": "ng build",
             "problemMatcher": []
         },
         {
