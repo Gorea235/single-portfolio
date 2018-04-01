@@ -24,9 +24,6 @@ const moduleRoutes: Routes = [
     ImageScrollComponent,
     GalleryItemComponent,
     ContactInfoComponent
-  ],
-  exports: [
-    HomeComponent
   ]
 })
 export class HomeModule { }

@@ -20,9 +20,6 @@ const moduleRoutes: Routes = [
   declarations: [
     AdminGalleryComponent,
     ImageComponent
-  ],
-  exports: [
-    AdminGalleryComponent
   ]
 })
 export class AdminGalleryModule { }

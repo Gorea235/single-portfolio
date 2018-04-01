@@ -22,9 +22,6 @@ const moduleRoutes: Routes = [
     GalleryComponent,
     ImageComponent,
     FullImageComponent
-  ],
-  exports: [
-    GalleryComponent
   ]
 })
 export class GalleryModule { }

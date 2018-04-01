@@ -20,9 +20,6 @@ const moduleRoutes: Routes = [
   declarations: [
     AdminComponent,
     GalleryItemComponent
-  ],
-  exports: [
-    AdminComponent
   ]
 })
 export class AdminModule { }
