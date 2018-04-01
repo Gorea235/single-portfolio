@@ -10,7 +10,9 @@
     "url": "https://github.com/Gorea235/single-portfolio"
   },
   "dependencies": {
+    "@types/node": "^9.6.1",
     "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
     "serve-favicon": "^2.4.5"
