@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './components/app/app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AppMatsModule } from './/app-mats.module';
+import { AppMatsModule } from './app-mats.module';
 
 
 @NgModule({
