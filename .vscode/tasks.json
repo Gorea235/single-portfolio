@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "ng build",
             "type": "typescript",
             "tsconfig": "tsconfig.json",
             "problemMatcher": [
@@ -16,12 +16,40 @@
             }
         },
         {
-            "label": "serve",
+            "label": "ng serve",
             "type": "shell",
             "command": "ng serve",
             "isBackground": true,
-            "dependsOn": "build",
+            "dependsOn": "ng build",
             "problemMatcher": []
+        },
+        {
+            "label": "node build",
+            "type": "typescript",
+            "tsconfig": "node/tsconfig.node.json",
+            "problemMatcher": [
+                "$tsc"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "node serve",
+            "type": "shell",
+            "command": "node ${workspaceFolder}/dist/app.js",
+            "isBackground": true,
+            "dependsOn": "node build",
+            "problemMatcher": [],
+            "options": {
+                "env": {
+                    "PORT": "4200"
+                }
+            }
         }
     ]
 }

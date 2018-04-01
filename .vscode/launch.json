@@ -18,6 +18,19 @@
             "name": "Attach to Chrome",
             "port": 9222,
             "webRoot": "${workspaceRoot}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Node",
+            "program": "${workspaceFolder}/dist/app.js",
+            "preLaunchTask": "node build",
+            "outFiles": [
+                "${workspaceFolder}/dist/*.js"
+            ],
+            "env": {
+                "PORT": "4200"
+            }
         }
     ]
 }
