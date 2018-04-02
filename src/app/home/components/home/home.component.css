@@ -1,0 +1,12 @@
+.container-split,
+.container-split > div {
+    height: 100%;
+}
+
+.container-img-left {
+    float: left;
+}
+
+.container-img-right {
+    float: right;
+}

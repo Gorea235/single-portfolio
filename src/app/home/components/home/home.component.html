@@ -1,1 +1,9 @@
-<h1>home page</h1>
+<div class="container-split" (window:resize)="onResize(event)" #homeContent>
+    <div class="container-img-left" [ngStyle]="sidebarStyle">
+        <app-home-image-scroll *ngFor="let i of (imageCount | iterator)" [size]="sidebarWidth" [active]="sidebarVisible"></app-home-image-scroll>
+    </div>
+    <div class="container-img-right" [ngStyle]="sidebarStyle">
+        <app-home-image-scroll *ngFor="let i of (imageCount | iterator)" [size]="sidebarWidth" [active]="sidebarVisible"></app-home-image-scroll>
+    </div>
+    <div [style.margin-left.px]="sidebarWidth" [style.margin-right.px]="sidebarWidth"></div>
+</div>

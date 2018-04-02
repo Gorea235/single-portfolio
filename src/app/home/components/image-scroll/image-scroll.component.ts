@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-home-image-scroll',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./image-scroll.component.css']
 })
 export class ImageScrollComponent {
-
+  @Input('size') size: number;
+  @Input('active') active: boolean;
 }
