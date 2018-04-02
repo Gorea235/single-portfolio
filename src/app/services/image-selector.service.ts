@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ImageSelectorService {
-  constructor() { }
+  private imageRngUrl = 'api/rng-image';
+
+  constructor(
+    private httpClient: HttpClient
+  ) { }
 
   getNextImage(): Observable<string> {
-    return of('https://picsum.photos/300?random?rng=' + Math.random());
+    return this.httpClient.get<string>(this.imageRngUrl);
   }
 }
