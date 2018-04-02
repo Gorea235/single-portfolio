@@ -1,4 +1,4 @@
-<div class="container-split" (window:resize)="onResize(event)" #homeContent>
+<div class="container-split" (window:resize)="onResize()" #homeContent>
     <div class="container-img-left" [ngStyle]="sidebarStyle">
         <app-home-image-scroll *ngFor="let i of (imageCount | iterator)" [size]="sidebarWidth" [active]="sidebarVisible"></app-home-image-scroll>
     </div>

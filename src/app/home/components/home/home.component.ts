@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     this.adjustSidebar();
   }
 
-  onResize(event): void {
+  onResize(): void {
     this.adjustSidebar();
   }
 

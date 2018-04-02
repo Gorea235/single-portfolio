@@ -1,5 +1,6 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   {
@@ -22,7 +23,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes, { enableTracing: isDevMode() })
+    RouterModule.forRoot(appRoutes, { enableTracing: !environment.production })
   ],
   exports: [
     RouterModule
