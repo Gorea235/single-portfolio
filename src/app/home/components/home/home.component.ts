@@ -8,7 +8,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class HomeComponent implements OnInit {
   imageCount = 4;
   sidebarWidth: number;
-  sidebarVisible = false;
+  sidebarVisible = true;
   sidebarStyle: {};
   @ViewChild('homeContent') homeContent: ElementRef;
 
