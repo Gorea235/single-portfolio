@@ -1,14 +1,15 @@
-.container-split,
-.container-split > div {
+.container-split {
     height: 100%;
 }
 
 .container-img-left {
-    float: left;
+    position: fixed;
+    left: 0;
 }
 
 .container-img-right {
-    float: right;
+    position: fixed;
+    right: 0;
 }
 
 .container-content {

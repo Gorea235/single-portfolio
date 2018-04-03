@@ -18,4 +18,8 @@ export class GalleryService {
   getGallery(id: number): Observable<GalleryModel> {
     return this.httpClient.get<GalleryModel>(`${this.galleryUrl}/${id}`);
   }
+
+  updateGallery(gallery: GalleryModel) {
+
+  }
 }

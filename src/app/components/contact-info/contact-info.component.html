@@ -1,0 +1,13 @@
+<div class="footer-container" [style.left.px]="offset" [style.right.px]="offset" (click)="footerClicked()">
+  <footer>
+    <div class="header">
+      <h3>Contact Info</h3>
+    </div>
+    <div class="internal-info" [style.height.px]="infoHeight" #internalInfoContainer>
+      <p>internal content</p>
+    </div>
+    <div class="help-info">
+      <p class="click-info mat-caption">{{ contactHelpText }}</p>
+    </div>
+  </footer>
+</div>

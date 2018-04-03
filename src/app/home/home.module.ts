@@ -11,6 +11,7 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { FullImageComponent } from './components/full-image/full-image.component';
 import { GalleryImageComponent } from './components/gallery-image/gallery-image.component';
 import { ContactInfoComponent } from './components/contact-info/contact-info.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 const moduleRoutes: Routes = [
   {
@@ -38,7 +39,8 @@ const moduleRoutes: Routes = [
     GalleryComponent,
     FullImageComponent,
     GalleryImageComponent,
-    ContactInfoComponent
+    ContactInfoComponent,
+    SearchBarComponent
   ]
 })
 export class HomeModule { }

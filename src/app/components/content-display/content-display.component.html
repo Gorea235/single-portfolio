@@ -6,6 +6,7 @@
     <app-image-scroll *ngFor="let i of (imageCount | iterator)" [size]="sidebarWidth" [active]="sidebarVisible"></app-image-scroll>
   </div>
   <div class="container-content" [style.margin-left.px]="sidebarWidth" [style.margin-right.px]="sidebarWidth">
+    <app-contact-info [offset]="sidebarWidth"></app-contact-info>
     <router-outlet></router-outlet>
   </div>
 </div>

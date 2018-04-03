@@ -1,7 +1,4 @@
-import {
-  Component, Input, OnInit, OnDestroy, ViewChild,
-  ElementRef
-} from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { ImageSelectorService } from '../../services/image-selector.service';
 
 @Component({

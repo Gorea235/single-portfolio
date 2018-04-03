@@ -17,6 +17,7 @@ import { AppComponent } from './components/app/app.component';
 import { ContentDisplayComponent } from './components/content-display/content-display.component';
 import { ImageScrollComponent } from './components/image-scroll/image-scroll.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ContactInfoComponent } from './components/contact-info/contact-info.component';
 
 // debug data sources
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -42,7 +43,8 @@ if (!environment.production)
     AppComponent,
     NavbarComponent,
     ContentDisplayComponent,
-    ImageScrollComponent
+    ImageScrollComponent,
+    ContactInfoComponent
   ],
   imports: imports,
   providers: [
