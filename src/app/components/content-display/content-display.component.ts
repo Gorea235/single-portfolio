@@ -20,7 +20,7 @@ export class ContentDisplayComponent implements OnInit {
     this.adjustSidebar();
   }
 
-  onResize(): void {
+  onResize(event): void {
     this.adjustSidebar();
   }
 

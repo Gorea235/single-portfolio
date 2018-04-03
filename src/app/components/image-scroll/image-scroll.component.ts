@@ -47,13 +47,13 @@ export class ImageScrollComponent implements OnInit, OnDestroy {
     });
   }
 
-  imgLeftLoad(): void {
+  imgLeftLoad(event): void {
     this.imgOffset = 0;
     this.imgOnLeft = true;
     this.startScrollTimer();
   }
 
-  imgRightLoad(): void {
+  imgRightLoad(event): void {
     this.imgOffset = -100;
     this.imgOnLeft = false;
     this.startScrollTimer();
