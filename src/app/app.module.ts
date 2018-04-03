@@ -37,11 +37,11 @@ const imports: any = [
   AppPipesModule
 ];
 
-// if (!environment.production)
-imports.push(
-  HttpClientInMemoryWebApiModule.forRoot(
-    InMemoryDataService, { dataEncapsulation: false }
-  ));
+if (!environment.production)
+  imports.push(
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    ));
 
 @NgModule({
   declarations: [
