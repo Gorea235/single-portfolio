@@ -9,11 +9,16 @@ export class InMemoryDataService implements InMemoryDbService {
   constructor() { }
 
   get(reqInfo: RequestInfo) {
-    if (reqInfo.collectionName === 'rng-image')
-      return this.getRngImage(reqInfo);
-    else if (reqInfo.collectionName === 'config')
-      return this.getRngImage(reqInfo);
-    return undefined;
+    switch (reqInfo.collectionName) {
+      case 'rng-image':
+        return this.getRngImage(reqInfo);
+      case 'config':
+        return this.getRngImage(reqInfo);
+      case 'search':
+        return this.getSearch(reqInfo);
+      default:
+        return undefined;
+    }
   }
 
   private getRngImage(reqInfo: RequestInfo) {
@@ -45,6 +50,29 @@ export class InMemoryDataService implements InMemoryDbService {
         body: reqInfo.utils.getConfig().dataEncapsulation ?
           { body } : body,
         status: STATUS.OK
+      }, reqInfo);
+    });
+  }
+
+  private getSearch(reqInfo: RequestInfo) {
+    return reqInfo.utils.createResponse$(() => {
+      let body: GalleryModel[] = null;
+
+      console.log(reqInfo);
+      if (reqInfo.query.has('term')) {
+        const term = reqInfo.query.get('term')[0];
+        const re = new RegExp(`.*${term}.*`);
+        body = [];
+        reqInfo.utils.getDb()['galleries'].forEach((element: GalleryModel) => {
+          if (element.name.search(re) >= 0)
+            body.push(element);
+        });
+      }
+
+      return this.finishOptions({
+        body: reqInfo.utils.getConfig().dataEncapsulation ?
+          { body } : body,
+        status: body != null ? STATUS.OK : STATUS.BAD_REQUEST
       }, reqInfo);
     });
   }

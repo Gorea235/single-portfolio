@@ -1,2 +1,2 @@
-<app-search-bar></app-search-bar>
-<app-gallery-list></app-gallery-list>
+<app-search-bar (onGalleryListUpdate)="onGalleryListUpdate($event)"></app-search-bar>
+<app-gallery-list [galleryList]="galleryList"></app-gallery-list>

@@ -1,0 +1,12 @@
+.list-item {
+    width: 100%;
+    height: fit-content !important;
+}
+
+.list-item:not(:first-child) {
+    margin-top: 8px;
+}
+
+.gallery-item {
+    width: 100%;
+}

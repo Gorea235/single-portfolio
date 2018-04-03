@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppMatsModule } from '../app-mats.module';
 import { AppPipesModule } from '../app-pipes.module';
 
@@ -28,7 +29,7 @@ const moduleRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(moduleRoutes),
-    RouterModule,
+    ReactiveFormsModule,
     AppMatsModule,
     AppPipesModule
   ],

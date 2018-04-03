@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // imported modules
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +13,7 @@ import { AppPipesModule } from './app-pipes.module';
 import { ImageSelectorService } from './services/image-selector.service';
 import { GalleryService } from './services/gallery.service';
 import { ConfigService } from './services/config.service';
+import { SearchService } from './services/search.service';
 
 // components
 import { AppComponent } from './components/app/app.component';
@@ -26,7 +29,9 @@ import { environment } from '../environments/environment';
 
 const imports: any = [
   BrowserModule,
+  BrowserAnimationsModule,
   HttpClientModule,
+  ReactiveFormsModule,
   AppRoutingModule,
   AppMatsModule,
   AppPipesModule
@@ -51,7 +56,8 @@ if (!environment.production)
     ImageSelectorService,
     GalleryService,
     ConfigService,
-    InMemoryDataService
+    InMemoryDataService,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })
