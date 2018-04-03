@@ -1,3 +1,14 @@
 .item-card {
     margin: 0 -16px;
+    cursor: pointer;
+}
+
+.img-display {
+    width: 100%;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.img-item {
+    height: 250px;
 }

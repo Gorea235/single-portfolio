@@ -1,24 +1,9 @@
-<mat-card class="item-card">
-  <div>
-    <ul>
-      <li>id: {{ gallery.id }}</li>
-      <li>name: {{ gallery.name }}</li>
-      <li>date added: {{ gallery.dateAdded }}</li>
-      <li>date update: {{ gallery.dateUpdated }}</li>
-      <li>images</li>
-      <ul>
-        <div *ngFor="let img of gallery.images">
-          <li>id: {{ img.id }}</li>
-          <ul>
-            <li>date taken: {{ img.dateTaken }}</li>
-            <li>url: {{ img.url }}</li>
-            <li>categories</li>
-            <ul>
-              <li *ngFor="let category of img.categories">{{ category.name }}</li>
-            </ul>
-          </ul>
-        </div>
-      </ul>
-    </ul>
+<mat-card class="item-card" (click)="onClick($event)">
+  <mat-card>
+    <h3>{{ gallery.name }}</h3>
+  </mat-card>
+  <div class="img-display" #imgDisplayContainer>
+    <img class="img-item" [attr.src]="img" [style.margin-left.px]="first ? 0 : imgSpacing" *ngFor="let img of displayedImages; let first = first"
+    />
   </div>
 </mat-card>

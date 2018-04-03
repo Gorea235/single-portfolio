@@ -14,6 +14,7 @@ import { ImageSelectorService } from './services/image-selector.service';
 import { GalleryService } from './services/gallery.service';
 import { ConfigService } from './services/config.service';
 import { SearchService } from './services/search.service';
+import { ImageHelperService } from './services/image-helper.service';
 
 // components
 import { AppComponent } from './components/app/app.component';
@@ -57,7 +58,8 @@ if (!environment.production)
     GalleryService,
     ConfigService,
     InMemoryDataService,
-    SearchService
+    SearchService,
+    ImageHelperService
   ],
   bootstrap: [AppComponent]
 })
