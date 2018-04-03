@@ -6,8 +6,8 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./contact-info.component.css']
 })
 export class ContactInfoComponent {
-  @Input('offset') offset: number;
   @ViewChild('internalInfoContainer') internalInfoContainer: ElementRef;
+  @Input() offset: number;
 
   contactHelpTexts = [
     'Click to expand',
@@ -16,8 +16,6 @@ export class ContactInfoComponent {
   contactHelpText = 'Click to expand';
   showInfo = false;
   infoHeight = 0;
-
-  constructor() { }
 
   get internalInfoContainerActualHeight(): number {
     return this.internalInfoContainer.nativeElement.scrollHeight;

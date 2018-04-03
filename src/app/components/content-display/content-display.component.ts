@@ -6,11 +6,12 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./content-display.component.css']
 })
 export class ContentDisplayComponent implements OnInit {
+  @ViewChild('homeContent') homeContent: ElementRef;
+
   imageCount = 4;
   sidebarWidth: number;
   sidebarVisible = true;
   sidebarStyle: {};
-  @ViewChild('homeContent') homeContent: ElementRef;
 
   get contentHeight() {
     return this.homeContent.nativeElement.offsetHeight;
