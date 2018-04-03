@@ -14,12 +14,14 @@ import { ConfigService } from './services/config.service';
 
 // components
 import { AppComponent } from './components/app/app.component';
+import { ContentDisplayComponent } from './components/content-display/content-display.component';
+import { ImageScrollComponent } from './components/image-scroll/image-scroll.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { environment } from '../environments/environment';
 
 // debug data sources
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data.service';
+import { environment } from '../environments/environment';
 
 const imports: any = [
   BrowserModule,
@@ -38,7 +40,9 @@ if (!environment.production)
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    ContentDisplayComponent,
+    ImageScrollComponent
   ],
   imports: imports,
   providers: [

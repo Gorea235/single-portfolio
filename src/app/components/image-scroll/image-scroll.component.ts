@@ -2,10 +2,10 @@ import {
   Component, Input, OnInit, OnDestroy, ViewChild,
   ElementRef
 } from '@angular/core';
-import { ImageSelectorService } from '../../../services/image-selector.service';
+import { ImageSelectorService } from '../../services/image-selector.service';
 
 @Component({
-  selector: 'app-home-image-scroll',
+  selector: 'app-image-scroll',
   templateUrl: './image-scroll.component.html',
   styleUrls: ['./image-scroll.component.css']
 })

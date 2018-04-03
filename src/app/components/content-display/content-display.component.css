@@ -1,0 +1,16 @@
+.container-split,
+.container-split > div {
+    height: 100%;
+}
+
+.container-img-left {
+    float: left;
+}
+
+.container-img-right {
+    float: right;
+}
+
+.container-content {
+    padding: 15px 10px;
+}

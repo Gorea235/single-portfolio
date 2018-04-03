@@ -1,0 +1,11 @@
+<div class="container-split" (window:resize)="onResize()" #homeContent>
+  <div class="container-img-left" [ngStyle]="sidebarStyle">
+    <app-image-scroll *ngFor="let i of (imageCount | iterator)" [size]="sidebarWidth" [active]="sidebarVisible"></app-image-scroll>
+  </div>
+  <div class="container-img-right" [ngStyle]="sidebarStyle">
+    <app-image-scroll *ngFor="let i of (imageCount | iterator)" [size]="sidebarWidth" [active]="sidebarVisible"></app-image-scroll>
+  </div>
+  <div class="container-content" [style.margin-left.px]="sidebarWidth" [style.margin-right.px]="sidebarWidth">
+    <router-outlet></router-outlet>
+  </div>
+</div>

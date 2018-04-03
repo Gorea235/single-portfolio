@@ -4,20 +4,12 @@ import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   {
-    path: '',
-    loadChildren: 'app/home/home.module#HomeModule'
-  },
-  {
     path: 'admin',
     loadChildren: 'app/admin/admin.module#AdminModule'
   },
   {
-    path: 'admin/:galleryId',
-    loadChildren: 'app/admin-gallery/admin-gallery.module#AdminGalleryModule'
-  },
-  {
-    path: ':galleryId',
-    loadChildren: 'app/gallery/gallery.module#GalleryModule'
+    path: '',
+    loadChildren: 'app/home/home.module#HomeModule'
   }
 ];
 

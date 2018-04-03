@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './components/admin/admin.component';
-import { GalleryItemComponent } from './components/gallery-item/gallery-item.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { GalleryImageComponent } from './components/gallery-image/gallery-image.component';
+import { GalleryListItemComponent } from './components/gallery-list-item/gallery-list-item.component';
 
 const moduleRoutes: Routes = [
   {
@@ -19,7 +21,9 @@ const moduleRoutes: Routes = [
   ],
   declarations: [
     AdminComponent,
-    GalleryItemComponent
+    GalleryComponent,
+    GalleryImageComponent,
+    GalleryListItemComponent,
   ]
 })
 export class AdminModule { }
