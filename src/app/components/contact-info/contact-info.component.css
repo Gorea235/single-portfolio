@@ -2,6 +2,7 @@
     background: #eee;
     position: fixed;
     bottom: 0;
+    z-index: 2;
     padding: 2px;
     border: #ccc 1px solid;
 }
