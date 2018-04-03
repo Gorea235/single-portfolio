@@ -1,7 +1,7 @@
 <div class="img-scroll" [style.width.px]="size" [style.height.px]="size">
-    <div class="img-container" [style.left.%]="imgOffset">
-        <img [attr.src]="imgSrcLeft" class="img-item" [style.visibility]="imgSrcLeft != undefined ? 'visible' : 'hidden'" (load)="imgLeftLoad($event)"
-        />
-        <img [attr.src]="imgSrcRight" class="img-item" (load)="imgRightLoad($event)" />
-    </div>
+  <div class="img-container" [style.left.%]="imgOffset">
+    <img [attr.src]="imgSrcLeft" class="img-item" [style.visibility]="imgSrcLeft != undefined ? 'visible' : 'hidden'" (load)="imgLeftLoad($event)"
+    />
+    <img [attr.src]="imgSrcRight" class="img-item" (load)="imgRightLoad($event)" />
+  </div>
 </div>
