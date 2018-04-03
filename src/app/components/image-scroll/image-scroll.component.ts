@@ -10,8 +10,9 @@ export class ImageScrollComponent implements OnInit, OnDestroy {
   minScrollInterval = 5000;
   maxScrollInterval = 20000;
 
-  @Input('size') size: number;
-  @Input('active') active: boolean;
+  @Input() size: number;
+  @Input() active: boolean;
+
   imgOnLeft = true;
   imgSrcLeft: string;
   imgSrcRight: string;
