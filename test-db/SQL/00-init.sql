@@ -64,9 +64,9 @@ CREATE TABLE `GalleryImageCategories` (
 -- init default data
 
 INSERT INTO `ImageKind` (`ID`, `Name`, `Desc`)
-VALUES (1, 'Direct URL', 'Direct image link');
+VALUES (0, 'Direct URL', 'Direct image link');
 INSERT INTO `ImageKind` (`ID`, `Name`, `Desc`)
-VALUES (2, 'Imgur ID', 'Direct Imgur ID');
+VALUES (1, 'Imgur ID', 'Direct Imgur ID');
 
 -- init debug data
 
