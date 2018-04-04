@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { ImageSelectorService } from '../../services/image-selector.service';
+import { ImageHelperService } from '../../services/image-helper.service';
 
 @Component({
   selector: 'app-image-scroll',
@@ -20,7 +21,8 @@ export class ImageScrollComponent implements OnInit, OnDestroy {
   scrollTimerId;
 
   constructor(
-    private imageSelectorService: ImageSelectorService
+    private imageSelectorService: ImageSelectorService,
+    private imageHelperService: ImageHelperService
   ) { }
 
   ngOnInit(): void {
@@ -39,10 +41,11 @@ export class ImageScrollComponent implements OnInit, OnDestroy {
 
   scrollNext(): void {
     this.imageSelectorService.getNextImage().subscribe(img => {
+      const url = this.imageHelperService.getSmallImageUrl(img);
       if (this.imgOnLeft) {
-        this.imgSrcRight = img;
+        this.imgSrcRight = url;
       } else {
-        this.imgSrcLeft = img;
+        this.imgSrcLeft = url;
       }
       console.log(img);
     });

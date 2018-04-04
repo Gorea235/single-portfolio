@@ -18,22 +18,19 @@
     transition: left 1s;
 }
 
-.img-container-notrans {
-    -webkit-transition: left 0 !important;
-    -moz-transition: left 0 !important;
-    -o-transition: left 0 !important;
-    transition: left 0 !important;
-}
-
-.img-container img {
+.img-item {
+    height: 100%;
+    width: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     float: left;
     margin: 0;
     padding: 0;
     position: relative;
     display: block;
-    width: 50%;
 }
 
-.img-item {
-    height: 100%;
+.img-item img {
+    visibility: hidden;
 }
