@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { Connection } from 'mysql';
 
 export interface ApiRoute {
     /**
@@ -11,8 +12,9 @@ export interface ApiRoute {
 export class Index implements ApiRoute {
     mountRoutes(router: Router) {
         router.get('/', (req, res) => {
-            res.json({
-                message: 'not implemented'
+            res.status(400).json({
+                error: 'bad request',
+                message: 'given request was not valid'
             });
         });
     }

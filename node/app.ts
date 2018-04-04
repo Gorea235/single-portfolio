@@ -6,6 +6,7 @@ import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as debug from 'debug';
+import { createConnection, Connection } from 'mysql';
 
 import { ApiRouter } from './api';
 
@@ -14,17 +15,28 @@ class App {
     private server;
     private debug;
     private port;
+    private dbConn: Connection;
+    private apiRouter: ApiRouter;
 
     constructor() {
         this.express = express();
         this.debug = debug('express-example:server');
         this.initExpress();
         this.initPort();
+        this.initDbConn();
         this.initRouting();
     }
 
+    private logDebug(msg: any): void {
+        this.debug(msg);
+    }
+
+    private logInfo(msg: any): void {
+        console.log(msg);
+    }
+
     private initExpress() {
-        this.express.use(favicon(path.join(__dirname, 'favicon.ico')));
+        // this.express.use(favicon(path.join(__dirname, 'favicon.ico')));
         this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
         this.express.use(bodyParser.urlencoded({ extended: false }));
@@ -46,9 +58,23 @@ class App {
         return false;
     }
 
+    private initDbConn() {
+        // takes values from env var
+        // if they aren't defined, the defaults are used
+        // (the defaults are for the docker dev DB)
+        this.dbConn = createConnection({
+            host: process.env.DB_HOST || 'localhost',
+            port: parseInt(process.env.DB_PORT, 10) || 3316,
+            user: process.env.DB_USER || 'default',
+            password: process.env.DB_PWORD || 'default',
+            database: process.env.DB_DB || 'dev'
+        });
+    }
+
     private initRouting() {
         // api routes
-        this.express.use('/api', ApiRouter);
+        this.apiRouter = new ApiRouter(this.dbConn);
+        this.express.use('/api', this.apiRouter.getRouter());
 
         // angular routes
         this.express.use('*', (req, res) => {
@@ -91,7 +117,7 @@ class App {
         const bind = typeof addr === 'string'
             ? 'pipe ' + addr
             : 'port ' + addr.port;
-        this.debug('Listening on ' + bind);
+        this.logInfo('Listening on ' + bind);
     }
 }
 

@@ -1,7 +1,12 @@
 import { Router } from 'express';
 import { ApiRoute } from './base';
+import { Connection } from 'mysql';
 
-export class User implements ApiRoute {
+export class Auth implements ApiRoute {
+    constructor(
+        private dbConn: Connection
+    ) { }
+
     mountRoutes(router: Router) {
         router.get('/users', (req, res) => {
             res.json({

@@ -1,9 +1,13 @@
 import { CategoryModel } from './category-model';
+import { ImageKindModel } from './image-kind-model';
 
 export class GalleryImageModel {
     id: number;
-    dateTaken: Date;
-    imageId: string;
+    desc: string;
+    dateTaken: string;
+    imageData: string;
 
+    galleryId: number;
+    imageKind: ImageKindModel;
     categories: CategoryModel[];
 }
