@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  single-portfolio-test-db-img:
+    container_name: single-portfolio-test-db
+    image: single-portfolio-test-db-img
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3316:3306
