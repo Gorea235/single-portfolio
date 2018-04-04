@@ -88,7 +88,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 0,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 0,
@@ -107,7 +107,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 1,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'ijUsmYO.jpg',
             categories: [
               {
                 id: 0,
@@ -122,7 +122,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 2,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 2,
@@ -145,7 +145,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 0,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 0,
@@ -160,7 +160,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 1,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 0,
@@ -175,7 +175,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 2,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 1,
@@ -198,7 +198,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 0,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 0,
@@ -217,7 +217,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 1,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 0,
@@ -232,7 +232,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 2,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 2,
@@ -255,7 +255,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 0,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 0,
@@ -274,7 +274,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 1,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 0,
@@ -289,7 +289,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 2,
             dateTaken: new Date,
-            url: 'https://picsum.photos/300?random?rng=' + Math.random(),
+            imageId: 'https://picsum.photos/300?random?rng=' + Math.random(),
             categories: [
               {
                 id: 2,
