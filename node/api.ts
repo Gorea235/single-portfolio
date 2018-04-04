@@ -5,12 +5,14 @@ import { Connection } from 'mysql';
 // API imports
 import { Auth } from './api/auth';
 import { Galleries } from './api/galleries';
+import { Auther } from './Auther';
 
 export class ApiRouter {
     private apiRoutes: ApiRoute[];
     private router: Router;
 
     constructor(
+        private auther: Auther,
         private dbConn: Connection
     ) { }
 
@@ -19,7 +21,7 @@ export class ApiRouter {
         this.router = Router();
 
         // load routes
-        this.apiRoutes.push(new Auth(this.dbConn));
+        this.apiRoutes.push(new Auth(this.auther, this.dbConn));
         this.apiRoutes.push(new Galleries(this.dbConn));
 
         // mount routes

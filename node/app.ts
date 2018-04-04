@@ -9,12 +9,14 @@ import * as debug from 'debug';
 import { createConnection, Connection } from 'mysql';
 
 import { ApiRouter } from './api';
+import { Auther } from './Auther';
 
 class App {
     private express;
     private server;
     private debug;
     private port;
+    private auther;
     private dbConn: Connection;
     private apiRouter: ApiRouter;
 
@@ -24,6 +26,7 @@ class App {
         this.initExpress();
         this.initPort();
         this.initDbConn();
+        this.auther = new Auther(this.dbConn);
         this.initRouting();
     }
 
@@ -39,7 +42,7 @@ class App {
         // this.express.use(favicon(path.join(__dirname, 'favicon.ico')));
         this.express.use(logger('dev'));
         this.express.use(bodyParser.json());
-        this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(bodyParser.urlencoded({ extended: true }));
         this.express.use(cookieParser());
         this.express.use(express.static(path.join(__dirname)));
     }
@@ -73,7 +76,7 @@ class App {
 
     private initRouting() {
         // api routes
-        this.apiRouter = new ApiRouter(this.dbConn);
+        this.apiRouter = new ApiRouter(this.auther, this.dbConn);
         this.express.use('/api', this.apiRouter.getRouter());
 
         // angular routes
