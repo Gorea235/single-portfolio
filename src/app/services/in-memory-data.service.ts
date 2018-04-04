@@ -5,6 +5,7 @@ import { GalleryModel } from '../models/gallery-model';
 import { ConfigModel } from '../models/config-model';
 import { ImageKindModel } from '../models/image-kind-model';
 import { CategoryModel } from '../models/category-model';
+import { GalleryImageModel } from '../models/gallery-image-model';
 
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {
@@ -23,9 +24,14 @@ export class InMemoryDataService implements InMemoryDbService {
     }
   }
 
+  private selectRandomItem(lst: any[]): any {
+    return lst[Math.floor(Math.random() * lst.length)];
+  }
+
   private getRngImage(reqInfo: RequestInfo) {
     return reqInfo.utils.createResponse$(() => {
-      const body = 'https://picsum.photos/300?random?rng=' + Math.random();
+      const galleries = reqInfo.utils.getDb()['galleries'];
+      const body: GalleryImageModel = this.selectRandomItem(this.selectRandomItem(galleries).images);
 
       return this.finishOptions({
         body: reqInfo.utils.getConfig().dataEncapsulation ?
@@ -37,12 +43,13 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private getConfig(reqInfo: RequestInfo) {
     return reqInfo.utils.createResponse$(() => {
+      const config = reqInfo.utils.getDb()['config'];
       let body;
       // tslint:disable-next-line:triple-equals
       if (reqInfo.id == undefined)
-        body = reqInfo.utils.getDb()['config'];
+        body = config;
       else {
-        reqInfo.utils.getDb()['config'].forEach(element => {
+        config.forEach(element => {
           if (reqInfo.id === element.key)
             body = element.value;
         });
@@ -86,6 +93,12 @@ export class InMemoryDataService implements InMemoryDbService {
       desc: 'Direct image link'
     };
 
+    const imageKindImgur: ImageKindModel = {
+      id: 1,
+      name: 'Imgur ID',
+      desc: 'Direct Imgur ID'
+    };
+
     const categories: CategoryModel[] = [
       {
         id: 0,
@@ -119,13 +132,13 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 0,
         name: 'gallery test',
         desc: '',
-        dateAdded: new Date,
-        dateUpdated: new Date,
+        dateAdded: new Date().toString(),
+        dateUpdated: new Date().toString(),
         images: [
           {
             id: 0,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 0,
             imageKind: imageKindDirect,
@@ -138,10 +151,10 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 1,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'ijUsmYO.jpg',
             galleryId: 0,
-            imageKind: imageKindDirect,
+            imageKind: imageKindImgur,
             categories: [
               categories[0],
               categories[1]
@@ -150,7 +163,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 2,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 0,
             imageKind: imageKindDirect,
@@ -165,13 +178,13 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 1,
         desc: '',
         name: 'gallery test 2',
-        dateAdded: new Date,
-        dateUpdated: new Date,
+        dateAdded: new Date().toString(),
+        dateUpdated: new Date().toString(),
         images: [
           {
             id: 0,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 1,
             imageKind: imageKindDirect,
@@ -183,7 +196,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 1,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 1,
             imageKind: imageKindDirect,
@@ -195,7 +208,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 2,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 1,
             imageKind: imageKindDirect,
@@ -210,13 +223,13 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 2,
         name: 'gallery test 3',
         desc: '',
-        dateAdded: new Date,
-        dateUpdated: new Date,
+        dateAdded: new Date().toString(),
+        dateUpdated: new Date().toString(),
         images: [
           {
             id: 0,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 2,
             imageKind: imageKindDirect,
@@ -229,7 +242,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 1,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 2,
             imageKind: imageKindDirect,
@@ -241,7 +254,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 2,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 2,
             imageKind: imageKindDirect,
@@ -256,13 +269,13 @@ export class InMemoryDataService implements InMemoryDbService {
         id: 3,
         name: 'gallery test 4',
         desc: '',
-        dateAdded: new Date,
-        dateUpdated: new Date,
+        dateAdded: new Date().toString(),
+        dateUpdated: new Date().toString(),
         images: [
           {
             id: 0,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 3,
             imageKind: imageKindDirect,
@@ -275,7 +288,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 1,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 3,
             imageKind: imageKindDirect,
@@ -287,7 +300,7 @@ export class InMemoryDataService implements InMemoryDbService {
           {
             id: 2,
             desc: '',
-            dateTaken: new Date,
+            dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 3,
             imageKind: imageKindDirect,

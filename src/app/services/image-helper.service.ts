@@ -22,11 +22,11 @@ export class ImageHelperService {
     }
   }
 
-  getFullImageUrl(img: any): string {
+  getFullImageUrl(img: GalleryImageModel): string {
     return this.getImageUrl(img, '');
   }
 
-  getSmallImageUrl(img: any): string {
+  getSmallImageUrl(img: GalleryImageModel): string {
     return this.getImageUrl(img, this.currentSuffix);
   }
 }
