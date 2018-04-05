@@ -18,6 +18,8 @@ export class InMemoryDataService implements InMemoryDbService {
   ) { }
 
   get(reqInfo: RequestInfo): Observable<any> {
+    if (reqInfo.url.startsWith('api/galleries/') && reqInfo.url.endsWith('/images'))
+      return this.getImages(reqInfo);
     switch (reqInfo.collectionName) {
       case 'rng-image':
         return this.getRngImage(reqInfo);
@@ -78,7 +80,6 @@ export class InMemoryDataService implements InMemoryDbService {
     return reqInfo.utils.createResponse$(() => {
       let body: GalleryModel[] = null;
 
-      console.log(reqInfo);
       if (reqInfo.query.has('term')) {
         const term = reqInfo.query.get('term')[0];
         const re = new RegExp(`.*${term}.*`);
@@ -93,6 +94,19 @@ export class InMemoryDataService implements InMemoryDbService {
         body: reqInfo.utils.getConfig().dataEncapsulation ?
           { body } : body,
         status: body != null ? STATUS.OK : STATUS.BAD_REQUEST
+      }, reqInfo);
+    });
+  }
+
+  private getImages(reqInfo: RequestInfo): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const galleries: GalleryModel[] = reqInfo.utils.getDb()['galleries'];
+      const body: GalleryImageModel[] = reqInfo.utils.findById(galleries, reqInfo.id).images;
+
+      return this.finishOptions({
+        body: reqInfo.utils.getConfig().dataEncapsulation ?
+          { body } : body,
+        status: STATUS.OK
       }, reqInfo);
     });
   }
@@ -142,7 +156,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 0,
         name: 'gallery test',
-        desc: '',
+        desc: 'testing gallery 1',
         dateAdded: new Date().toString(),
         dateUpdated: new Date().toString(),
         images: [
@@ -187,8 +201,8 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         id: 1,
-        desc: '',
         name: 'gallery test 2',
+        desc: 'testing gallery 2',
         dateAdded: new Date().toString(),
         dateUpdated: new Date().toString(),
         images: [
