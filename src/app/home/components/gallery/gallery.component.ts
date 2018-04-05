@@ -20,23 +20,25 @@ export class GalleryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.galleryService.getGallery(parseInt(this.route.snapshot.paramMap.get('galleryId'), 10))
-      .subscribe(gallery => {
-        this.gallery = gallery;
-      }, err => {
-        console.error(`Error, ${err.body.error}: ${err.body.message}`);
-        switch (err.status) {
-          case 404:
-            this.error = 'Gallery was not found';
-            break;
-          case 500:
-            this.error = 'A server error occured while fetching the gallery';
-            break;
-          default:
-            this.error = 'An error occured while fetching the gallery';
-            break;
-        }
-      });
+    this.route.params.subscribe(params => {
+      this.galleryService.getGallery(parseInt(params['galleryId'], 10))
+        .subscribe(gallery => {
+          this.gallery = gallery;
+        }, err => {
+          console.error(`Error, ${err.body.error}: ${err.body.message}`);
+          switch (err.status) {
+            case 404:
+              this.error = 'Gallery was not found';
+              break;
+            case 500:
+              this.error = 'A server error occured while fetching the gallery';
+              break;
+            default:
+              this.error = 'An error occured while fetching the gallery';
+              break;
+          }
+        });
+    });
   }
 
   dateFormat(date: string): string {
