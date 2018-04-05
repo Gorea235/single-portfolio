@@ -10,9 +10,9 @@ import { AppMatsModule } from './app-mats.module';
 import { AppPipesModule } from './app-pipes.module';
 
 // services
+import { HttpHelperService } from './services/http-helper.service';
 import { ImageSelectorService } from './services/image-selector.service';
 import { GalleryService } from './services/gallery.service';
-import { ConfigService } from './services/config.service';
 import { SearchService } from './services/search.service';
 import { ImageHelperService } from './services/image-helper.service';
 
@@ -54,9 +54,9 @@ if (!environment.production)
   ],
   imports: imports,
   providers: [
+    HttpHelperService,
     ImageSelectorService,
     GalleryService,
-    ConfigService,
     InMemoryDataService,
     SearchService,
     ImageHelperService
