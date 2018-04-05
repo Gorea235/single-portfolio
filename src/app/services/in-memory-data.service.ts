@@ -162,7 +162,7 @@ export class InMemoryDataService implements InMemoryDbService {
         images: [
           {
             id: 0,
-            desc: '',
+            desc: 'first image',
             dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 0,
@@ -187,7 +187,7 @@ export class InMemoryDataService implements InMemoryDbService {
           },
           {
             id: 2,
-            desc: '',
+            desc: 'second image',
             dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 0,
@@ -253,7 +253,7 @@ export class InMemoryDataService implements InMemoryDbService {
         images: [
           {
             id: 0,
-            desc: '',
+            desc: 'first image gallery 3',
             dateTaken: new Date().toString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 2,
