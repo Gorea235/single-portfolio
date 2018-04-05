@@ -47,7 +47,7 @@
         {
             "label": "node debug serve",
             "type": "shell",
-            "command": "ts-node ${workspaceFolder}/node/app.ts",
+            "command": "ts-node -P ${workspaceFolder}/node/tsconfig.node.json --type-check ${workspaceFolder}/node/app.ts",
             "isBackground": true,
             "problemMatcher": [],
             "options": {
