@@ -1,3 +1,17 @@
-<a routerLink="/">
-  <h1 style="margin:0;">gallery page</h1>
+<mat-card class="error-box" *ngIf="error">{{ error }}</mat-card>
+<mat-card *ngIf="gallery">
+  <mat-card>
+    <h1>{{ gallery.name }}</h1>
+  </mat-card>
+  <mat-card class="item-next">
+    <div *ngIf="gallery.desc">
+      <h2>Description</h2>
+      <p>{{ gallery.desc }}</p>
+    </div>
+    <p>Added: {{ dateFormat(gallery.dateAdded) }}, Updated: {{ dateFormat(gallery.dateUpdated) }}</p>
+  </mat-card>
+  <app-gallery-image *ngFor="let img of gallery.images" [image]="img"></app-gallery-image>
+</mat-card>
+<a class="back-button item-next" mat-raised-button routerLink="/">
+  <mat-icon>arrow_back_ios</mat-icon> Back to gallery
 </a>

@@ -1,0 +1,31 @@
+.img-container {
+    margin-top: 10px;
+    /* width: fit-content;
+    display: inline-block;
+    margin-right: 10px; */
+}
+
+.disp-img-container {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.disp-img {
+    max-height: 600px;
+    max-width: 100%;
+    cursor: pointer;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.cats {
+    margin-bottom: 0;
+}
+
+.cat-link {
+    color: #aaa;
+    text-decoration: none;
+}
