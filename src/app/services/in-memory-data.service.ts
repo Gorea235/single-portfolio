@@ -2,20 +2,24 @@ import { Injectable } from '@angular/core';
 import { InMemoryDbService, RequestInfo, ResponseOptions, getStatusText, STATUS } from 'angular-in-memory-web-api';
 import { Observable } from 'rxjs/Observable';
 import { GalleryModel } from '../models/gallery-model';
-import { ConfigModel } from '../models/config-model';
 import { ImageKindModel } from '../models/image-kind-model';
 import { CategoryModel } from '../models/category-model';
 import { GalleryImageModel } from '../models/gallery-image-model';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpHelperService } from './http-helper.service';
 
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {
-  constructor() { }
+  private adminPassword = 'default';
 
-  get(reqInfo: RequestInfo) {
+  constructor(
+    private cookieService: CookieService,
+    private httpHelperService: HttpHelperService
+  ) { }
+
+  get(reqInfo: RequestInfo): Observable<any> {
     switch (reqInfo.collectionName) {
       case 'rng-image':
-        return this.getRngImage(reqInfo);
-      case 'config':
         return this.getRngImage(reqInfo);
       case 'search':
         return this.getSearch(reqInfo);
@@ -24,13 +28,42 @@ export class InMemoryDataService implements InMemoryDbService {
     }
   }
 
-  private selectRandomItem(lst: any[]): any {
+  private getAuth(reqInfo: RequestInfo): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const config: { key: string, value: string }[] = reqInfo.utils.getDb()['config'];
+      let status: number;
+
+      switch (reqInfo.id) {
+        case 'check':
+          status =
+            config[0].value !== '' && this.cookieService.get(this.httpHelperService.cookieLoginToken) === config[0].value ?
+              STATUS.OK : STATUS.BAD_REQUEST;
+          break;
+        case 'login':
+          const reqBody = reqInfo.utils.getJsonBody(reqInfo.req);
+          if (reqBody.password && reqBody.password === this.adminPassword) {
+            const token = Math.random().toString();
+            config[0].value = token;
+            reqInfo.headers.set('Cookie', `token=${token}`);
+            status = STATUS.OK;
+          } else
+            status = STATUS.BAD_REQUEST;
+          break;
+      }
+
+      return this.finishOptions({
+        status: status
+      }, reqInfo);
+    });
+  }
+
+  private selectRandomItem<T>(lst: T[]): T {
     return lst[Math.floor(Math.random() * lst.length)];
   }
 
-  private getRngImage(reqInfo: RequestInfo) {
+  private getRngImage(reqInfo: RequestInfo): Observable<any> {
     return reqInfo.utils.createResponse$(() => {
-      const galleries = reqInfo.utils.getDb()['galleries'];
+      const galleries: GalleryModel[] = reqInfo.utils.getDb()['galleries'];
       const body: GalleryImageModel = this.selectRandomItem(this.selectRandomItem(galleries).images);
 
       return this.finishOptions({
@@ -41,29 +74,7 @@ export class InMemoryDataService implements InMemoryDbService {
     });
   }
 
-  private getConfig(reqInfo: RequestInfo) {
-    return reqInfo.utils.createResponse$(() => {
-      const config = reqInfo.utils.getDb()['config'];
-      let body;
-      // tslint:disable-next-line:triple-equals
-      if (reqInfo.id == undefined)
-        body = config;
-      else {
-        config.forEach(element => {
-          if (reqInfo.id === element.key)
-            body = element.value;
-        });
-      }
-
-      return this.finishOptions({
-        body: reqInfo.utils.getConfig().dataEncapsulation ?
-          { body } : body,
-        status: STATUS.OK
-      }, reqInfo);
-    });
-  }
-
-  private getSearch(reqInfo: RequestInfo) {
+  private getSearch(reqInfo: RequestInfo): Observable<any> {
     return reqInfo.utils.createResponse$(() => {
       let body: GalleryModel[] = null;
 
@@ -313,9 +324,9 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
 
-    const config: ConfigModel[] = [
+    const config = [
       {
-        key: '',
+        key: 'login_token',
         value: ''
       }
     ];

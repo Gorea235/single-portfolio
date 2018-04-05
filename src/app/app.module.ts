@@ -10,11 +10,13 @@ import { AppMatsModule } from './app-mats.module';
 import { AppPipesModule } from './app-pipes.module';
 
 // services
+import { CookieService } from 'ngx-cookie-service';
 import { HttpHelperService } from './services/http-helper.service';
 import { ImageSelectorService } from './services/image-selector.service';
 import { GalleryService } from './services/gallery.service';
 import { SearchService } from './services/search.service';
 import { ImageHelperService } from './services/image-helper.service';
+import { AuthService } from './services/auth.service';
 
 // components
 import { AppComponent } from './components/app/app.component';
@@ -54,12 +56,14 @@ if (!environment.production)
   ],
   imports: imports,
   providers: [
+    CookieService,
     HttpHelperService,
     ImageSelectorService,
     GalleryService,
     InMemoryDataService,
     SearchService,
-    ImageHelperService
+    ImageHelperService,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

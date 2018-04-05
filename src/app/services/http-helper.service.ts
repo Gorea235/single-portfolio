@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class HttpHelperService {
+  cookieLoginToken = 'token';
   defaultOps: {} = {
     withCredentials: true
   };
