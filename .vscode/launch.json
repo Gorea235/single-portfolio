@@ -23,10 +23,10 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Node",
-            "program": "${workspaceFolder}/dist/app.js",
+            "program": "${workspaceFolder}/build/node/app.js",
             "preLaunchTask": "node build",
             "outFiles": [
-                "${workspaceFolder}/dist/*.js"
+                "${workspaceFolder}/build/node/*.js"
             ],
             "env": {
                 "PORT": "4200"

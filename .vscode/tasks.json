@@ -34,13 +34,25 @@
         {
             "label": "node serve",
             "type": "shell",
-            "command": "node ${workspaceFolder}/dist/app.js",
+            "command": "node ${workspaceFolder}/build/node/app.js",
             "isBackground": true,
             "dependsOn": "node build",
             "problemMatcher": [],
             "options": {
                 "env": {
                     "PORT": "4200"
+                }
+            }
+        },
+        {
+            "label": "node debug serve",
+            "type": "shell",
+            "command": "ts-node ${workspaceFolder}/node/app.ts",
+            "isBackground": true,
+            "problemMatcher": [],
+            "options": {
+                "env": {
+                    "PORT": "3000"
                 }
             }
         }
