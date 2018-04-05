@@ -30,7 +30,7 @@ INSERT INTO \`Config\` (\`Key\`, \`Value\`) VALUES (?, ?)
                 [this.loginTokenKey],
                 (err, results) => {
                     if (err) throw err;
-                    cb(results.length > 0 ? req.cookies[this.cookieTokenName] === results[0].value : false);
+                    cb(results.length > 0 && results[0].value ? req.cookies[this.cookieTokenName] === results[0].value : false);
                 });
         else
             cb(false);
