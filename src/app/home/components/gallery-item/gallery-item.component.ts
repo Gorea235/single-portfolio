@@ -9,28 +9,15 @@ import { ImageHelperService } from '../../../services/image-helper.service';
   templateUrl: './gallery-item.component.html',
   styleUrls: ['./gallery-item.component.css']
 })
-export class GalleryItemComponent implements OnChanges {
+export class GalleryItemComponent {
   imgSpacing = 5;
 
   @ViewChild('imgDisplayContainer') imgDisplayContainer: ElementRef;
   @Input() gallery: GalleryModel;
 
-  displayedImages: string[];
-
   constructor(
-    private router: Router,
-    private imageHelperService: ImageHelperService
+    private router: Router
   ) { }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.gallery) {
-      const imgs = [];
-      this.gallery.images.slice(0, 3).forEach(element => {
-        imgs.push(this.imageHelperService.getSmallImageUrl(element));
-      });
-      this.displayedImages = imgs;
-    }
-  }
 
   onClick(event): void {
     this.router.navigate([`${this.gallery.id}`]);
