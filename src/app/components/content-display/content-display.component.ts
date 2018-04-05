@@ -6,12 +6,18 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./content-display.component.css']
 })
 export class ContentDisplayComponent implements OnInit {
+  imageCount = 4;
+  minWidth = 992;
+
   @ViewChild('homeContent') homeContent: ElementRef;
 
-  imageCount = 4;
   sidebarWidth: number;
   sidebarVisible = true;
   sidebarStyle: {};
+
+  get contentWidth() {
+    return this.homeContent.nativeElement.offsetWidth;
+  }
 
   get contentHeight() {
     return this.homeContent.nativeElement.offsetHeight;
@@ -26,6 +32,7 @@ export class ContentDisplayComponent implements OnInit {
   }
 
   adjustSidebar(): void {
+    this.sidebarVisible = this.contentWidth >= this.minWidth;
     this.sidebarWidth = this.sidebarVisible ? this.contentHeight / this.imageCount : 0;
     this.updateSidebarStyle();
   }
