@@ -1,11 +1,12 @@
-import * as http from 'http';
+import { createServer } from 'http';
 import * as express from 'express';
-import * as path from 'path';
+import { join } from 'path';
 import * as favicon from 'serve-favicon';
 import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
-import * as bodyParser from 'body-parser';
+import { json, urlencoded } from 'body-parser';
 import * as debug from 'debug';
+import { existsSync } from 'fs';
 import { createConnection, Connection } from 'mysql';
 
 import { ApiRouter } from './api';
@@ -39,12 +40,14 @@ class App {
     }
 
     private initExpress() {
-        // this.express.use(favicon(path.join(__dirname, 'favicon.ico')));
+        const favPath = join(__dirname, 'favicon.ico');
+        if (existsSync(favPath))
+            this.express.use(favicon(favPath));
         this.express.use(logger('dev'));
-        this.express.use(bodyParser.json());
-        this.express.use(bodyParser.urlencoded({ extended: true }));
+        this.express.use(json());
+        this.express.use(urlencoded({ extended: true }));
         this.express.use(cookieParser());
-        this.express.use(express.static(path.join(__dirname)));
+        this.express.use(express.static(join(__dirname)));
     }
 
     private initPort() {
@@ -81,12 +84,12 @@ class App {
 
         // angular routes
         this.express.use('*', (req, res) => {
-            res.sendFile(path.join(__dirname, 'index.html'));
+            res.sendFile(join(__dirname, 'index.html'));
         });
     }
 
     public listen() {
-        this.server = http.createServer(this.express);
+        this.server = createServer(this.express);
         this.server.listen(this.port);
         this.server.on('error', error => this.onError(error));
         this.server.on('listening', () => this.onListening());

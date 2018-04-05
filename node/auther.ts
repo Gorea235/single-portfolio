@@ -1,4 +1,3 @@
-
 import { Connection } from 'mysql';
 import { Request, Response } from 'express';
 import { randomBytes } from 'crypto';
