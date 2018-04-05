@@ -4,7 +4,8 @@ import { GalleryImageModel } from '../models/gallery-image-model';
 
 @Injectable()
 export class ImageHelperService {
-  private currentSuffix = 'l';
+  private smallSuffix = 'm';
+  private mediumSuffix = 'l';
   private imgurUrl = 'https://i.imgur.com';
   private imgIdRe = /^(.*?)(\..+)$/;
 
@@ -26,7 +27,11 @@ export class ImageHelperService {
     return this.getImageUrl(img, '');
   }
 
+  getMediumUrl(img: GalleryImageModel): string {
+    return this.getImageUrl(img, this.mediumSuffix);
+  }
+
   getSmallImageUrl(img: GalleryImageModel): string {
-    return this.getImageUrl(img, this.currentSuffix);
+    return this.getImageUrl(img, this.smallSuffix);
   }
 }
