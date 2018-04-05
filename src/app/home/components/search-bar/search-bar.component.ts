@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
 import { GalleryModel } from '../../../models/gallery-model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -15,7 +16,8 @@ export class SearchBarComponent implements OnInit {
   searchTerm = new FormControl();
 
   constructor(
-    private searchService: SearchService
+    private searchService: SearchService,
+    private route: ActivatedRoute
   ) {
     this.searchTerm.valueChanges.pipe(
       debounceTime(400),
@@ -25,7 +27,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchTerm.setValue('');
+    this.route.queryParamMap.subscribe(map => {
+      this.searchTerm.setValue(map.get('q') || '');
+    });
   }
 
   onSearch(res: GalleryModel[]): void {
