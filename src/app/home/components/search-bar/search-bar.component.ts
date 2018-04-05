@@ -20,7 +20,7 @@ export class SearchBarComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.searchTerm.valueChanges.pipe(
-      debounceTime(400),
+      debounceTime(50),
       distinctUntilChanged(),
       switchMap(term => searchService.search(term))
     ).subscribe(res => this.onSearch(res));
