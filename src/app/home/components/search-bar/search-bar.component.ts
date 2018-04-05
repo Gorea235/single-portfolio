@@ -1,8 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators/debounceTime';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { distinctUntilChanged } from 'rxjs/operators/distinctUntilChanged';
+import { debounceTime, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
 import { GalleryModel } from '../../../models/gallery-model';
 

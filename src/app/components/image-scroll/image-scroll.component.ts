@@ -47,7 +47,6 @@ export class ImageScrollComponent implements OnInit, OnDestroy {
       } else {
         this.imgSrcLeft = url;
       }
-      console.log(img);
     });
   }
 

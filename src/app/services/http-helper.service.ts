@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { switchMap } from 'rxjs/operators/switchMap';
+import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 @Injectable()

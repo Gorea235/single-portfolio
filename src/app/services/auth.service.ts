@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelperService } from './http-helper.service';
-import { switchMap } from 'rxjs/operators/switchMap';
+import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { CookieService } from 'ngx-cookie-service';
 
