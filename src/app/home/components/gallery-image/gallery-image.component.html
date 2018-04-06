@@ -7,7 +7,7 @@
         Categories:
         <span *ngFor="let category of image.categories; let first = first">
             <span *ngIf="!first">, </span>
-            <a class="cat-link" routerLink="/" [queryParams]="{q: category.name}">{{ category.name }}</a>
+            <a class="cat-link" routerLink="/" [queryParams]="{q: 'cat:' + category.name}">{{ category.name }}</a>
         </span>
     </p>
     <app-full-image *ngIf="showImgCloseUp" [image]="image" (onClose)="closeUpClosed($event)"></app-full-image>
