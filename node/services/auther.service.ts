@@ -2,7 +2,7 @@ import { Connection } from 'mysql';
 import { Request, Response } from 'express';
 import { randomBytes } from 'crypto';
 
-export class Auther {
+export class AutherService {
     private loginTokenKey = 'login_token';
     private cookieTokenName = 'token';
     private sqlLoginTokenGet = `

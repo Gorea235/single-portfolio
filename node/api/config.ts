@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { ApiRoute, sqlPrimer } from './base';
 import { Connection } from 'mysql';
-import { Auther } from '../auther';
+import { AutherService } from '../services/auther.service';
 
 export class Config implements ApiRoute {
     // whitelist config values
@@ -25,7 +25,7 @@ WHERE 'Key' = ?
 `);
 
     constructor(
-        private auther: Auther,
+        private auther: AutherService,
         private dbConn: Connection
     ) { }
 

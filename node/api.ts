@@ -2,8 +2,11 @@ import { Router } from 'express';
 import { Index, ApiRoute } from './api/base';
 import { Connection } from 'mysql';
 
+// servie imports
+import { AutherService } from './services/auther.service';
+import { GalleryService } from './services/gallery.service';
+
 // API imports
-import { Auther } from './auther';
 import { Auth } from './api/auth';
 import { Galleries } from './api/galleries';
 import { Config } from './api/config';
@@ -14,7 +17,8 @@ export class ApiRouter {
     private router: Router;
 
     constructor(
-        private auther: Auther,
+        private auther: AutherService,
+        private galleryHelper: GalleryService,
         private dbConn: Connection
     ) { }
 
@@ -24,7 +28,7 @@ export class ApiRouter {
 
         // load routes
         this.apiRoutes.push(new Auth(this.auther, this.dbConn));
-        this.apiRoutes.push(new Galleries(this.dbConn));
+        this.apiRoutes.push(new Galleries(this.galleryHelper));
         this.apiRoutes.push(new Config(this.auther, this.dbConn));
         this.apiRoutes.push(new Search(this.dbConn));
 

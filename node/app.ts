@@ -10,16 +10,20 @@ import { existsSync } from 'fs';
 import { createConnection, Connection } from 'mysql';
 
 import { ApiRouter } from './api';
-import { Auther } from './auther';
+import { AutherService } from './services/auther.service';
+import { GalleryService } from './services/gallery.service';
 
 class App {
     private express;
     private server;
     private debug;
     private port;
-    private auther;
     private dbConn: Connection;
     private apiRouter: ApiRouter;
+
+    // services
+    private auther;
+    private galleryHelper;
 
     constructor() {
         this.express = express();
@@ -27,7 +31,7 @@ class App {
         this.initExpress();
         this.initPort();
         this.initDbConn();
-        this.auther = new Auther(this.dbConn);
+        this.initServices();
         this.initRouting();
     }
 
@@ -77,9 +81,14 @@ class App {
         });
     }
 
+    private initServices() {
+        this.auther = new AutherService(this.dbConn);
+        this.galleryHelper = new GalleryService(this.dbConn);
+    }
+
     private initRouting() {
         // api routes
-        this.apiRouter = new ApiRouter(this.auther, this.dbConn);
+        this.apiRouter = new ApiRouter(this.auther, this.galleryHelper, this.dbConn);
         this.express.use('/api', this.apiRouter.getRouter());
 
         // angular routes

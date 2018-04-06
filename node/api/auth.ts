@@ -1,11 +1,11 @@
 import { Router, Request, Response } from 'express';
 import { ApiRoute } from './base';
 import { Connection } from 'mysql';
-import { Auther } from '../auther';
+import { AutherService } from '../services/auther.service';
 
 export class Auth implements ApiRoute {
     constructor(
-        private auther: Auther,
+        private auther: AutherService,
         private dbConn: Connection
     ) { }
 
