@@ -42,11 +42,11 @@ node-prep: prep
 	mkdir -p $(NODE_OUT)
 	cp -f $(NODE)$(PKG) $(NODE_OUT)$(PKG)
 	cp -f $(NODE)$(PKG_LOCK) $(NODE_OUT)$(PKG_LOCK)
-	npm install --production --prefix $(NODE_OUT)
+	npm install --prefix $(NODE_OUT)
 
 # angular
 ng: ng-prep
-	$(BIN)/ng build -prod -op $(NG_OUT)
+	$(BIN)/ng build -op $(NG_OUT)
 
 node: node-prep
 	mkdir -p $(NODE_OUT)
