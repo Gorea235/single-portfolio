@@ -6,7 +6,7 @@ import { Connection } from 'mysql';
 import { Auth } from './api/auth';
 import { Galleries } from './api/galleries';
 import { Config } from './api/config';
-import { Auther } from './Auther';
+import { Auther } from './auther';
 
 export class ApiRouter {
     private apiRoutes: ApiRoute[];

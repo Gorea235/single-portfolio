@@ -10,7 +10,7 @@ import { existsSync } from 'fs';
 import { createConnection, Connection } from 'mysql';
 
 import { ApiRouter } from './api';
-import { Auther } from './Auther';
+import { Auther } from './auther';
 
 class App {
     private express;
