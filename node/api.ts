@@ -5,6 +5,7 @@ import { Connection } from 'mysql';
 // API imports
 import { Auth } from './api/auth';
 import { Galleries } from './api/galleries';
+import { Config } from './api/config';
 import { Auther } from './Auther';
 
 export class ApiRouter {
@@ -23,6 +24,7 @@ export class ApiRouter {
         // load routes
         this.apiRoutes.push(new Auth(this.auther, this.dbConn));
         this.apiRoutes.push(new Galleries(this.dbConn));
+        this.apiRoutes.push(new Config(this.auther, this.dbConn));
 
         // mount routes
         this.apiRoutes.forEach(apiRoute => apiRoute.mountRoutes(this.router));

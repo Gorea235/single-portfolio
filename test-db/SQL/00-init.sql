@@ -68,6 +68,11 @@ VALUES (0, 'Direct URL', 'Direct image link');
 INSERT INTO `ImageKind` (`ID`, `Name`, `Desc`)
 VALUES (1, 'Imgur ID', 'Direct Imgur ID');
 
+INSERT INTO `Config` (`Key`, `Value`)
+VALUES ('portfolio_title', '');
+INSERT INTO `Config` (`Key`, `Value`)
+VALUES ('contact_info', '');
+
 -- init debug data
 
 INSERT INTO `Categories` (`Name`, `Desc`)
