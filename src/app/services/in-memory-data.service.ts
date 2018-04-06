@@ -7,6 +7,8 @@ import { CategoryModel } from '../models/category-model';
 import { GalleryImageModel } from '../models/gallery-image-model';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHelperService } from './http-helper.service';
+import { ConfigService } from './config.service';
+import { ConfigModel } from '../models/config-model';
 
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {
@@ -25,6 +27,8 @@ export class InMemoryDataService implements InMemoryDbService {
         return this.getRngImage(reqInfo);
       case 'search':
         return this.getSearch(reqInfo);
+      case 'config':
+        return this.getConfig(reqInfo);
       default:
         return undefined;
     }
@@ -102,6 +106,26 @@ export class InMemoryDataService implements InMemoryDbService {
     return reqInfo.utils.createResponse$(() => {
       const galleries: GalleryModel[] = reqInfo.utils.getDb()['galleries'];
       const body: GalleryImageModel[] = reqInfo.utils.findById(galleries, reqInfo.id).images;
+
+      return this.finishOptions({
+        body: reqInfo.utils.getConfig().dataEncapsulation ?
+          { body } : body,
+        status: STATUS.OK
+      }, reqInfo);
+    });
+  }
+
+  private getConfig(reqInfo: RequestInfo): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const config: ConfigModel[] = reqInfo.utils.getDb()['config'];
+      let body: ConfigModel;
+
+      console.log(reqInfo);
+      console.log(config);
+      config.forEach(element => {
+        if (element.key === reqInfo.id)
+          body = element;
+      });
 
       return this.finishOptions({
         body: reqInfo.utils.getConfig().dataEncapsulation ?
@@ -338,10 +362,18 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     ];
 
-    const config = [
+    const config: ConfigModel[] = [
       {
         key: 'login_token',
         value: ''
+      },
+      {
+        key: ConfigService.keyPortfolioTitle,
+        value: 'test title'
+      },
+      {
+        key: ConfigService.keyContactInfo,
+        value: 'line 1\nline 2\nline 3'
       }
     ];
 

@@ -1,4 +1,5 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-contact-info',
@@ -16,6 +17,16 @@ export class ContactInfoComponent {
   contactHelpText = 'Click to expand';
   showInfo = false;
   infoHeight = 0;
+  infoText: string[];
+
+  constructor(
+    private configService: ConfigService
+  ) {
+    configService.getConfig(ConfigService.keyContactInfo)
+      .subscribe(cnf => {
+        this.infoText = cnf.value.split('\n');
+      });
+  }
 
   get internalInfoContainerActualHeight(): number {
     return this.internalInfoContainer.nativeElement.scrollHeight;

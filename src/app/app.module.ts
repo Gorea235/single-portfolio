@@ -17,6 +17,7 @@ import { GalleryService } from './services/gallery.service';
 import { SearchService } from './services/search.service';
 import { ImageHelperService } from './services/image-helper.service';
 import { AuthService } from './services/auth.service';
+import { ConfigService } from './services/config.service';
 
 // components
 import { AppComponent } from './components/app/app.component';
@@ -64,6 +65,7 @@ if (!environment.production)
     SearchService,
     ImageHelperService,
     AuthService,
+    ConfigService,
   ],
   bootstrap: [AppComponent]
 })
