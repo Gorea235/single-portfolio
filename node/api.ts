@@ -11,6 +11,7 @@ import { Auth } from './api/auth';
 import { Galleries } from './api/galleries';
 import { Config } from './api/config';
 import { Search } from './api/search';
+import { RngImage } from './api/rng-image';
 
 export class ApiRouter {
     private apiRoutes: ApiRoute[];
@@ -31,6 +32,7 @@ export class ApiRouter {
         this.apiRoutes.push(new Galleries(this.galleryHelper));
         this.apiRoutes.push(new Config(this.auther, this.dbConn));
         this.apiRoutes.push(new Search(this.dbConn));
+        this.apiRoutes.push(new RngImage(this.galleryHelper));
 
         // mount routes
         this.apiRoutes.forEach(apiRoute => apiRoute.mountRoutes(this.router));
