@@ -1,19 +1,20 @@
 import { Connection } from 'mysql';
 import { Request, Response } from 'express';
 import { randomBytes } from 'crypto';
+import { sqlPrimer } from './base.service';
 
 export class AutherService {
     private loginTokenKey = 'login_token';
     private cookieTokenName = 'token';
-    private sqlLoginTokenGet = `
-SELECT \`value\`
-FROM \`Config\`
-WHERE \`Key\` = ?
-`;
-    private sqlLoginTokenSet = `
-INSERT INTO \`Config\` (\`Key\`, \`Value\`) VALUES (?, ?)
-  ON DUPLICATE KEY UPDATE \`Value\` = ?;
-`;
+    private sqlLoginTokenGet = sqlPrimer(`
+SELECT 'value'
+FROM 'Config'
+WHERE 'Key' = ?
+`);
+    private sqlLoginTokenSet = sqlPrimer(`
+INSERT INTO 'Config' ('Key', 'Value') VALUES (?, ?)
+  ON DUPLICATE KEY UPDATE 'Value' = ?;
+`);
 
     constructor(
         private dbConn: Connection
