@@ -11,7 +11,10 @@ import { createConnection, Connection } from 'mysql';
 
 import { ApiRouter } from './api';
 import { AutherService } from './services/auther.service';
+import { ConfigService } from './services/config.service';
 import { GalleryService } from './services/gallery.service';
+import { RngImageService } from './services/rng-image.service';
+import { SearchService } from './services/search.service';
 
 class App {
     private express;
@@ -22,8 +25,11 @@ class App {
     private apiRouter: ApiRouter;
 
     // services
-    private auther;
-    private galleryHelper;
+    private autherService: AutherService;
+    private configService: ConfigService;
+    private galleryService: GalleryService;
+    private rngImageService: RngImageService;
+    private searchService: SearchService;
 
     constructor() {
         this.express = express();
@@ -82,13 +88,22 @@ class App {
     }
 
     private initServices() {
-        this.auther = new AutherService(this.dbConn);
-        this.galleryHelper = new GalleryService(this.dbConn);
+        this.autherService = new AutherService(this.dbConn);
+        this.configService = new ConfigService(this.autherService, this.dbConn);
+        this.galleryService = new GalleryService(this.dbConn);
+        this.rngImageService = new RngImageService(this.galleryService, this.dbConn);
+        this.searchService = new SearchService(this.dbConn);
     }
 
     private initRouting() {
         // api routes
-        this.apiRouter = new ApiRouter(this.auther, this.galleryHelper, this.dbConn);
+        this.apiRouter = new ApiRouter(
+            this.autherService,
+            this.configService,
+            this.galleryService,
+            this.rngImageService,
+            this.searchService
+        );
         this.express.use('/api', this.apiRouter.getRouter());
 
         // angular routes

@@ -1,12 +1,10 @@
 import { Router, Request, Response } from 'express';
 import { ApiRoute } from './base';
-import { Connection } from 'mysql';
 import { AutherService } from '../services/auther.service';
 
 export class Auth implements ApiRoute {
     constructor(
-        private auther: AutherService,
-        private dbConn: Connection
+        private autherService: AutherService
     ) { }
 
     mountRoutes(router: Router) {
@@ -23,10 +21,10 @@ export class Auth implements ApiRoute {
     }
 
     private checkLoggedIn(req: Request, res: Response): void {
-        this.auther.isLoggedIn(req, loggedIn => res.sendStatus(loggedIn ? 200 : 401));
+        this.autherService.isLoggedIn(req, loggedIn => res.sendStatus(loggedIn ? 200 : 401));
     }
 
     private doLogin(req: Request, res: Response): void {
-        this.auther.doLogin(req, res, success => res.sendStatus(success ? 200 : 400));
+        this.autherService.doLogin(req, res, success => res.sendStatus(success ? 200 : 400));
     }
 }

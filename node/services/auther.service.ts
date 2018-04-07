@@ -24,31 +24,43 @@ INSERT INTO \`Config\` (\`Key\`, \`Value\`) VALUES (?, ?)
     }
 
     public isLoggedIn(req: Request, cb: (loggedIn: boolean) => void) {
-        if (req.cookies[this.cookieTokenName])
-            this.dbConn.query(this.sqlLoginTokenGet,
-                [this.loginTokenKey],
-                (err, results) => {
-                    if (err) throw err;
-                    cb(results.length > 0 && results[0].value ? req.cookies[this.cookieTokenName] === results[0].value : false);
-                });
-        else
-            cb(false);
+        if (req.cookies[this.cookieTokenName]) {
+            this.dbConn
+                .query(
+                    this.sqlLoginTokenGet,
+                    [this.loginTokenKey],
+                    (sqlErr, results) => {
+                        if (sqlErr) throw sqlErr;
+                        else cb(
+                            results.length > 0 && results[0].value ?
+                                req.cookies[this.cookieTokenName] === results[0].value :
+                                false
+                        );
+                    }
+                );
+        } else cb(false);
     }
 
     public doLogin(req: Request, res: Response, cb: (success: boolean) => void) {
         if (req.body.password === this.currentPassword) {
             randomBytes(256, (rngErr, buf) => {
                 if (rngErr) throw rngErr;
-                const token = buf.toString('base64');
-                this.dbConn.query(this.sqlLoginTokenSet,
-                    [this.loginTokenKey, token, token],
-                    (err, results) => {
-                        if (err) throw err;
-                        res.cookie(this.cookieTokenName, token);
-                        cb(true);
-                    });
+                else {
+                    const token = buf.toString('base64');
+                    this.dbConn
+                        .query(
+                            this.sqlLoginTokenSet,
+                            [this.loginTokenKey, token, token],
+                            (sqlErr, results) => {
+                                if (sqlErr) throw sqlErr;
+                                else {
+                                    res.cookie(this.cookieTokenName, token);
+                                    cb(true);
+                                }
+                            }
+                        );
+                }
             });
-        } else
-            cb(false);
+        } else cb(false);
     }
 }

@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { ApiRoute, sqlPrimer } from './base';
+import { ApiRoute } from './base';
 import { Connection } from 'mysql';
 import { GalleryService } from '../services/gallery.service';
 
@@ -28,46 +28,47 @@ export class Galleries implements ApiRoute {
     // GET (read) endpoints
 
     private listGalleries(req: Request, res: Response): void {
-        this.galleryHelper.listGalleries((err, results) => {
-            if (err) throw err;
-            res.json(results);
+        this.galleryHelper.listGalleries((sqlErr, results) => {
+            if (sqlErr) throw sqlErr;
+            else res.json(results);
         });
     }
 
     private getGallery(req: Request, res: Response): void {
-        this.galleryHelper.getGallery(req.params.galleryId, (err, results) => {
-            if (err) throw err;
-            if (results.length === 0)
+        this.galleryHelper.getGallery(req.params.galleryId, (sqlErr, results) => {
+            if (sqlErr) throw sqlErr;
+            else if (results.length === 0) {
                 res.status(404).json({
                     error: 'gallery not found',
                     message: `unable to find gallery with id ${req.params.galleryId}`
                 });
-            else
-                res.json(results[0]);
+            } else res.json(results[0]);
         });
     }
 
     private listImages(req: Request, res: Response): void {
-        this.galleryHelper.listImages(req.params.galleryId, (err, results) => {
-            if (err) throw err;
-            this.galleryHelper.processImages(results, imgs => {
+        this.galleryHelper.listImages(req.params.galleryId, (sqlErr, results) => {
+            if (sqlErr) throw sqlErr;
+            else this.galleryHelper.processImages(results, (sqlErrProc, imgs) => {
                 res.json(imgs);
             });
         });
     }
 
     private getImage(req: Request, res: Response): void {
-        this.galleryHelper.getImage(req.params.galleryId, req.params.imageId, (err, results) => {
-            if (err) throw err;
-            if (results.length === 0)
+        this.galleryHelper.getImage(req.params.galleryId, req.params.imageId, (sqlErr, results) => {
+            if (sqlErr) throw sqlErr;
+            else if (results.length === 0) {
                 res.status(404).json({
                     error: 'gallery image not found',
                     message: `unable to find gallery image with id ${req.params.imageId} in gallery ${req.params.galleryId}`
                 });
-            else
-                this.galleryHelper.processImage(results[0], img => {
-                    res.json(img);
+            } else {
+                this.galleryHelper.processImage(results[0], (sqlErrProc, img) => {
+                    if (sqlErrProc) throw sqlErrProc;
+                    else res.json(img);
                 });
+            }
         });
     }
 

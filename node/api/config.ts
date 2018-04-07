@@ -1,32 +1,12 @@
 import { Router, Request, Response } from 'express';
-import { ApiRoute, sqlPrimer } from './base';
+import { ApiRoute } from './base';
 import { Connection } from 'mysql';
 import { AutherService } from '../services/auther.service';
+import { ConfigService } from '../services/config.service';
 
 export class Config implements ApiRoute {
-    // whitelist config values
-    // using whitelist instead of blacklist for security
-    private allowedConfigs = [
-        'portfolio_title',
-        'contact_info'
-    ];
-
-    // get config
-    private sqlGetConfig = sqlPrimer(`
-SELECT 'key', 'value'
-FROM 'Config'
-WHERE 'key' = ?
-`);
-    // set config
-    private sqlSetConfig = sqlPrimer(`
-UPDATE 'Config'
-SET 'Value' = ?
-WHERE 'Key' = ?
-`);
-
     constructor(
-        private auther: AutherService,
-        private dbConn: Connection
+        private configService: ConfigService
     ) { }
 
     mountRoutes(router: Router) {
@@ -42,56 +22,41 @@ WHERE 'Key' = ?
         });
     }
 
-    private validKey(req: Request, res: Response): boolean {
-        // whitelist config keys
-        if (!(req.params.key in this.allowedConfigs)) {
-            res.status(403).json({
-                error: 'unauthorised',
-                message: 'requested config item was invalid'
-            });
-            return false;
-        } else {
-            return true;
-        }
+    private invalidRequest(res: Response) {
+        res.status(403).json({
+            error: 'unauthorised',
+            message: 'requested config item was invalid'
+        });
     }
 
     private getConfig(req: Request, res: Response): void {
-        if (this.validKey(req, res)) {
-            this.dbConn
-                .query(
-                    this.sqlGetConfig,
-                    [req.params.key],
-                    (err, results) => {
-                        if (err) throw err;
-                        res.json({
-                            key: results[0] && results[0].key,
-                            value: results[0] && results[0].value || ''
-                        });
-                    }
-                );
-        }
+        this.configService.getConfig(req.params.key, (sqlErr, results) => {
+            if (sqlErr) throw sqlErr;
+            else {
+                res.json({
+                    key: results[0] && results[0].key,
+                    value: results[0] && results[0].value || ''
+                });
+            }
+        }, () => this.invalidRequest(res));
     }
 
     private setConfig(req: Request, res: Response): void {
-        if (this.validKey(req, res)) {
-            this.auther.isLoggedIn(req, loggedIn => {
-                if (loggedIn) {
-                    this.dbConn
-                        .query(
-                            this.sqlSetConfig,
-                            [req.params.key, req.body.value],
-                            (err, results) => {
-                                if (err) throw err;
-                                res.sendStatus(200);
-                            }
-                        );
-                } else {
-                    res.status(403).json({
-                        error: 'unauthorized',
-                        message: 'sender was not authorised to make this request'
-                    });
+        this.configService.setConfig(req.params.key, req.body.value, req, (sqlErr, err, results) => {
+            if (sqlErr) throw sqlErr;
+            else if (err) {
+                switch (err) {
+                    case 'unauthorised':
+                        res.status(403).json({
+                            error: 'unauthorized',
+                            message: 'sender was not authorised to make this request'
+                        });
+                        break;
+                    default:
+                        res.sendStatus(500);
+                        break;
                 }
-            });
-        }
+            } else res.sendStatus(200);
+        }, () => this.invalidRequest(res));
     }
 }

@@ -1,4 +1,4 @@
-import { sqlPrimer } from '../api/base';
+import { sqlPrimer } from './base.service';
 import { Connection, MysqlError } from 'mysql';
 
 export class GalleryService {
@@ -38,8 +38,8 @@ AND 'GalleryImages'.'id' = ?
     private sqlGalleryImageCategoryList = sqlPrimer(`
 SELECT 'Categories'.'id', 'Categories'.'name', 'Categories'.'desc'
 FROM 'Categories'
-INNER JOIN 'GalleryImageCategories' ON 'GalleryImageCategories'.'id' = 'Categories'.'id'
-WHERE 'GalleryImageCategories'.'id' = ?
+INNER JOIN 'GalleryImageCategories' ON 'GalleryImageCategories'.'categoryId' = 'Categories'.'id'
+WHERE 'GalleryImageCategories'.'galleryImageId' = ?
 `);
 
     // create SQL strings
@@ -55,30 +55,30 @@ WHERE 'GalleryImageCategories'.'id' = ?
 
     // select methods
 
-    listGalleries(cb: (err: MysqlError, results: any) => void): void {
+    listGalleries(cb: (sqlErr: MysqlError, results: any) => void): void {
         this.dbConn
             .query(
                 this.sqlGalleryList,
-                (err, results) => cb(err, results)
+                (sqlErr, results) => cb(sqlErr, results)
             );
     }
 
-    getGallery(galleryId: number, cb: (err: MysqlError, results: any) => void): void {
+    getGallery(galleryId: number, cb: (sqlErr: MysqlError, results: any) => void): void {
         this.dbConn
             .query(
                 this.sqlGallerySelect,
                 [galleryId],
-                (err, results) => cb(err, results)
+                (sqlErr, results) => cb(sqlErr, results)
             );
     }
 
-    processImage(data: any, cb: (img) => void): void {
+    processImage(data: any, cb: (sqlErr: MysqlError, img: {}) => void): void {
         this.dbConn
             .query(
                 this.sqlGalleryImageCategoryList,
                 [data.id],
-                (err, results) => {
-                    cb({
+                (sqlErr, results) => {
+                    cb(sqlErr, {
                         id: data.id,
                         desc: data.desc,
                         dateTaken: data.dateTaken,
@@ -95,32 +95,33 @@ WHERE 'GalleryImageCategories'.'id' = ?
             );
     }
 
-    processImages(items: any, cb: (imgs) => void, current?) {
+    processImages(items: any, cb: (sqlErr: MysqlError, imgs: {}[]) => void, current?) {
         current = current || [];
-        this.processImage(items[0], img => {
-            current.push(img);
-            if (items.length > 1)
-                this.processImages(items.slice(1), cb, current);
-            else
-                cb(current);
+        this.processImage(items[0], (sqlErrProc, img) => {
+            if (sqlErrProc) cb(sqlErrProc, null);
+            else {
+                current.push(img);
+                if (items.length > 1) this.processImages(items.slice(1), cb, current);
+                else cb(null, current);
+            }
         });
     }
 
-    listImages(galleryId: number, cb: (err: MysqlError, results: any) => void): void {
+    listImages(galleryId: number, cb: (sqlErr: MysqlError, results: any) => void): void {
         this.dbConn
             .query(
                 this.sqlGalleryImageList,
                 [galleryId],
-                (err, results) => cb(err, results)
+                (sqlErr, results) => cb(sqlErr, results)
             );
     }
 
-    getImage(galleryId: number, imageId: number, cb: (err: MysqlError, results: any) => void): void {
+    getImage(galleryId: number, imageId: number, cb: (sqlErr: MysqlError, results: any) => void): void {
         this.dbConn
             .query(
                 this.sqlGalleryImageSelect,
                 [galleryId, imageId],
-                (err, results) => cb(err, results)
+                (sqlErr, results) => cb(sqlErr, results)
             );
     }
 
