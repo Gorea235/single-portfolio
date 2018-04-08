@@ -47,12 +47,9 @@ CREATE TABLE `Categories` (
 );
 
 CREATE TABLE `GalleryImageCategories` (
-    `ID` int NOT NULL AUTO_INCREMENT,
     `GalleryImageID` int NOT NULL,
     `CategoryID` int NOT NULL,
-    PRIMARY KEY (`ID`),
-    INDEX (`GalleryImageID`),
-    INDEX (`CategoryID`),
+    PRIMARY KEY (`GalleryImageID`, `CategoryID`),
     FOREIGN KEY (`GalleryImageID`)
         REFERENCES `GalleryImages`(`ID`)
         ON DELETE CASCADE,
