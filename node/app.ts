@@ -1,5 +1,6 @@
-import { createServer } from 'http';
+import { createServer, Server } from 'http';
 import * as express from 'express';
+import { Express } from 'express-serve-static-core';
 import { join } from 'path';
 import * as favicon from 'serve-favicon';
 import * as logger from 'morgan';
@@ -17,10 +18,10 @@ import { RngImageService } from './services/rng-image.service';
 import { SearchService } from './services/search.service';
 
 class App {
-    private express;
-    private server;
-    private debug;
-    private port;
+    private express: Express;
+    private server: Server;
+    private debug: debug.IDebugger;
+    private port: number;
     private dbConn: Connection;
     private apiRouter: ApiRouter;
 
@@ -65,13 +66,13 @@ class App {
         this.express.set('port', this.port);
     }
 
-    private normalizePort(val) {
-        val = parseInt(val, 10);
-        if (isNaN(val)) // named pipe
-            return val;
-        if (val >= 0) // port number
-            return val;
-        return false;
+    private normalizePort(val: string): number {
+        const ival = parseInt(val, 10);
+        if (isNaN(ival)) // named pipe
+            return ival;
+        if (ival >= 0) // port number
+            return ival;
+        return null;
     }
 
     private initDbConn() {
