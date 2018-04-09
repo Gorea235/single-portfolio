@@ -1,4 +1,4 @@
-export class ImageKindModel {
+export interface ImageKindModel {
     id: number;
     name: string;
     desc: string;

@@ -2,7 +2,7 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
-import { GalleryModel } from '../../../models/gallery-model';
+import { GalleryModel } from '../../../models/gallery.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

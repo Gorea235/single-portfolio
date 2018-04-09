@@ -1,4 +1,4 @@
-export class ConfigModel {
+export interface ConfigModel {
     key: string;
     value: string;
 }

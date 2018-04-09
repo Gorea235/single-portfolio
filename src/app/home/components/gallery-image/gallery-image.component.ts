@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { GalleryImageModel } from '../../../models/gallery-image-model';
+import { GalleryImageModel } from '../../../models/gallery-image.model';
 import { ImageHelperService } from '../../../services/image-helper.service';
 
 @Component({

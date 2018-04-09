@@ -1,6 +1,6 @@
-import { GalleryImageModel } from './gallery-image-model';
+import { GalleryImageModel } from './gallery-image.model';
 
-export class GalleryModel {
+export interface GalleryModel {
     id: number;
     name: string;
     desc: string;

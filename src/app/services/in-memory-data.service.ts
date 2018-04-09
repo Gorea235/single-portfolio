@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService, RequestInfo, ResponseOptions, getStatusText, STATUS } from 'angular-in-memory-web-api';
 import { Observable } from 'rxjs/Observable';
-import { GalleryModel } from '../models/gallery-model';
-import { ImageKindModel } from '../models/image-kind-model';
-import { CategoryModel } from '../models/category-model';
-import { GalleryImageModel } from '../models/gallery-image-model';
+import { GalleryModel } from '../models/gallery.model';
+import { ImageKindModel } from '../models/image-kind.model';
+import { CategoryModel } from '../models/category.model';
+import { GalleryImageModel } from '../models/gallery-image.model';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpHelperService } from './http-helper.service';
 import { ConfigService } from './config.service';
-import { ConfigModel } from '../models/config-model';
+import { ConfigModel } from '../models/config.model';
 
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {

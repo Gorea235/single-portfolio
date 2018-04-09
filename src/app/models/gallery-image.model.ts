@@ -1,7 +1,7 @@
-import { CategoryModel } from './category-model';
-import { ImageKindModel } from './image-kind-model';
+import { CategoryModel } from './category.model';
+import { ImageKindModel } from './image-kind.model';
 
-export class GalleryImageModel {
+export interface GalleryImageModel {
     id: number;
     desc: string;
     dateTaken: string;

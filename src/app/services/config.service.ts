@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { HttpHelperService } from './http-helper.service';
-import { ConfigModel } from '../models/config-model';
+import { ConfigModel } from '../models/config.model';
 
 @Injectable()
 export class ConfigService {

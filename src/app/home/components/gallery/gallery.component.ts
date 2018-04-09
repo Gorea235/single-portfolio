@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GalleryModel } from '../../../models/gallery-model';
+import { GalleryModel } from '../../../models/gallery.model';
 import { GalleryService } from '../../../services/gallery.service';
 import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import { GalleryImageModel } from '../models/gallery-image-model';
+import { GalleryImageModel } from '../models/gallery-image.model';
 
 @Injectable()
 export class ImageSelectorService {
