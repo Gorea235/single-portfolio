@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { ApiRoute } from './base';
 import { AutherService } from '../services/auther.service';
+import { respondError, badRequest } from '../errors';
 
 export class Auth implements ApiRoute {
     constructor(
@@ -8,16 +9,9 @@ export class Auth implements ApiRoute {
     ) { }
 
     mountRoutes(router: Router) {
-        router.get('/auth', (req, res) => this.baseRequest(req, res));
+        router.get('/auth', (req, res) => respondError(res, badRequest));
         router.get('/auth/check', (req, res) => this.checkLoggedIn(req, res));
         router.post('/auth/login', (req, res) => this.doLogin(req, res));
-    }
-
-    private baseRequest(req: Request, res: Response): void {
-        res.status(400).json({
-            error: 'bad request',
-            message: 'given request was not valid'
-        });
     }
 
     private checkLoggedIn(req: Request, res: Response): void {

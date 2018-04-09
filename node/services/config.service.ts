@@ -2,6 +2,7 @@ import { sqlPrimer } from './base.service';
 import { Connection, MysqlError } from 'mysql';
 import { AutherService } from './auther.service';
 import { Request } from 'express';
+import { ErrorData, unauthorized } from '../errors';
 
 export class ConfigService {
     // whitelist config values
@@ -47,7 +48,7 @@ WHERE 'Key' = ?
     }
 
     setConfig(key: string, value: string, req: Request,
-        valid: (sqlErr: MysqlError, err: string, results) => void, invalid: () => void): void {
+        valid: (sqlErr: MysqlError, err: ErrorData, results) => void, invalid: () => void): void {
         if (this.validKey(key)) {
             this.auther.isLoggedIn(req, loggedIn => {
                 if (loggedIn) {
@@ -58,7 +59,7 @@ WHERE 'Key' = ?
                             (sqlErr, results) => valid(sqlErr, null, results)
                         );
                 } else {
-                    valid(null, 'unauthorised', null);
+                    valid(null, unauthorized, null);
                 }
             });
         } else invalid();

@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { ApiRoute } from './base';
 import { Connection } from 'mysql';
 import { GalleryService } from '../services/gallery.service';
+import { respondError, notFound } from '../errors';
 
 export class Galleries implements ApiRoute {
     constructor(
@@ -38,9 +39,8 @@ export class Galleries implements ApiRoute {
         this.galleryHelper.getGallery(req.params.galleryId, (sqlErr, results) => {
             if (sqlErr) throw sqlErr;
             else if (results.length === 0) {
-                res.status(404).json({
-                    error: 'gallery not found',
-                    message: `unable to find gallery with id ${req.params.galleryId}`
+                respondError(res, notFound, {
+                    msg: `unable to find gallery with id ${req.params.galleryId}`
                 });
             } else res.json(results[0]);
         });
@@ -59,9 +59,8 @@ export class Galleries implements ApiRoute {
         this.galleryHelper.getImage(req.params.galleryId, req.params.imageId, (sqlErr, results) => {
             if (sqlErr) throw sqlErr;
             else if (results.length === 0) {
-                res.status(404).json({
-                    error: 'gallery image not found',
-                    message: `unable to find gallery image with id ${req.params.imageId} in gallery ${req.params.galleryId}`
+                respondError(res, notFound, {
+                    msg: `unable to find gallery image with id ${req.params.imageId} in gallery ${req.params.galleryId}`
                 });
             } else {
                 this.galleryHelper.processImage(results[0], (sqlErrProc, img) => {

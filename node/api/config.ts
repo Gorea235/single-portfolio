@@ -3,6 +3,7 @@ import { ApiRoute } from './base';
 import { Connection } from 'mysql';
 import { AutherService } from '../services/auther.service';
 import { ConfigService } from '../services/config.service';
+import { respondError, badRequest, unauthorized } from '../errors';
 
 export class Config implements ApiRoute {
     constructor(
@@ -10,23 +11,13 @@ export class Config implements ApiRoute {
     ) { }
 
     mountRoutes(router: Router) {
-        router.get('/config', (req, res) => this.baseRequest(req, res));
+        router.get('/config', (req, res) => respondError(res, badRequest));
         router.get('/config/:key', (req, res) => this.getConfig(req, res));
         router.post('/config/:key', (req, res) => this.setConfig(req, res));
     }
 
-    private baseRequest(req: Request, res: Response): void {
-        res.status(400).json({
-            error: 'bad request',
-            message: 'given request was not valid'
-        });
-    }
-
     private invalidRequest(res: Response) {
-        res.status(403).json({
-            error: 'unauthorised',
-            message: 'requested config item was invalid'
-        });
+        respondError(res, unauthorized, { msg: 'requested config item was invalid' });
     }
 
     private getConfig(req: Request, res: Response): void {
@@ -44,19 +35,8 @@ export class Config implements ApiRoute {
     private setConfig(req: Request, res: Response): void {
         this.configService.setConfig(req.params.key, req.body.value, req, (sqlErr, err, results) => {
             if (sqlErr) throw sqlErr;
-            else if (err) {
-                switch (err) {
-                    case 'unauthorised':
-                        res.status(403).json({
-                            error: 'unauthorized',
-                            message: 'sender was not authorised to make this request'
-                        });
-                        break;
-                    default:
-                        res.sendStatus(500);
-                        break;
-                }
-            } else res.sendStatus(200);
+            else if (err) respondError(res, err);
+            else res.sendStatus(200);
         }, () => this.invalidRequest(res));
     }
 }

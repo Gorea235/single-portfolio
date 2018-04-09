@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { ApiRoute } from './base';
 import { GalleryService } from '../services/gallery.service';
 import { RngImageService } from '../services/rng-image.service';
+import { respondError, serverError } from '../errors';
 
 export class RngImage implements ApiRoute {
     constructor(
@@ -16,7 +17,7 @@ export class RngImage implements ApiRoute {
         this.rngImageService.rngImage((sqlErr, image) => {
             if (sqlErr) throw sqlErr;
             else if (image) res.json(image);
-            else res.sendStatus(500);
+            else respondError(res, serverError);
         });
     }
 }
