@@ -128,7 +128,8 @@ export class Galleries implements ApiRoute {
     }
 
     private deleteImage(req: Request, res: Response): void {
-        this.galleryHelper.deleteImage(req,
+        this.galleryHelper.deleteImage(
+            req,
             req.params.galleryId,
             req.params.imageId,
             (sqlErr, err) => this.stdAlterResponse(sqlErr, err, res)
