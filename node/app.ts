@@ -91,7 +91,7 @@ class App {
     private initServices() {
         this.autherService = new AutherService(this.dbConn);
         this.configService = new ConfigService(this.autherService, this.dbConn);
-        this.galleryService = new GalleryService(this.dbConn);
+        this.galleryService = new GalleryService(this.autherService, this.dbConn);
         this.rngImageService = new RngImageService(this.galleryService, this.dbConn);
         this.searchService = new SearchService(this.dbConn);
     }

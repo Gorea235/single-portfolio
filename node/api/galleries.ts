@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { ApiRoute } from './base';
-import { Connection } from 'mysql';
+import { Connection, MysqlError } from 'mysql';
 import { GalleryService } from '../services/gallery.service';
-import { respondError, notFound } from '../errors';
+import { ErrorData, respondError, notFound } from '../errors';
 
 export class Galleries implements ApiRoute {
     constructor(
@@ -24,6 +24,12 @@ export class Galleries implements ApiRoute {
         // DELETEs
         router.delete('/galleries/:galleryId', (req, res) => this.deleteGallery(req, res));
         router.delete('/galleries/:galleryId/images/:imageId', (req, res) => this.deleteImage(req, res));
+    }
+
+    private stdAlterResponse(sqlErr: MysqlError, err: ErrorData, res: Response): void {
+        if (sqlErr) throw sqlErr;
+        else if (err) respondError(res, err);
+        else res.sendStatus(200);
     }
 
     // GET (read) endpoints
@@ -74,30 +80,58 @@ export class Galleries implements ApiRoute {
     // POST (create) endpoints
 
     private createGallery(req: Request, res: Response): void {
-
+        this.galleryHelper.createGallery(
+            req,
+            req.body,
+            (sqlErr, err) => this.stdAlterResponse(sqlErr, err, res)
+        );
     }
 
     private createImage(req: Request, res: Response): void {
-
+        this.galleryHelper.createImage(
+            req,
+            req.params.galleryId,
+            req.body,
+            (sqlErr, err) => this.stdAlterResponse(sqlErr, err, res)
+        );
     }
 
     // PATCH (update) endpoints
 
     private updateGallery(req: Request, res: Response): void {
-
+        this.galleryHelper.updateGallery(
+            req,
+            req.params.galleryId,
+            req.body,
+            (sqlErr, err) => this.stdAlterResponse(sqlErr, err, res)
+        );
     }
 
     private updateImage(req: Request, res: Response): void {
-
+        this.galleryHelper.updateImage(
+            req,
+            req.params.galleryId,
+            req.params.imageId,
+            req.body,
+            (sqlErr, err) => this.stdAlterResponse(sqlErr, err, res)
+        );
     }
 
     // DELETE (delete) endpoints
 
     private deleteGallery(req: Request, res: Response): void {
-
+        this.galleryHelper.deleteGallery(
+            req,
+            req.params.galleryId,
+            (sqlErr, err) => this.stdAlterResponse(sqlErr, err, res)
+        );
     }
 
     private deleteImage(req: Request, res: Response): void {
-
+        this.galleryHelper.deleteImage(req,
+            req.params.galleryId,
+            req.params.imageId,
+            (sqlErr, err) => this.stdAlterResponse(sqlErr, err, res)
+        );
     }
 }
