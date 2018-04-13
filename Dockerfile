@@ -9,6 +9,5 @@ COPY . .
 RUN make
 
 FROM base AS final
-WORKDIR /app
 COPY --from=build /src/build/out .
 ENTRYPOINT ["node", "app.js"]
