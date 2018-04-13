@@ -1,18 +1,18 @@
 .app-nav {
-    padding: 8px 16px;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 2;
-    position: fixed;
-    align-items: center;
-    background: #eeeeee;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3)
+  padding: 8px 16px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  position: fixed;
+  align-items: center;
+  background: #eeeeee;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3)
 }
 
 .nav-header-button {
-    text-align: center;
-    width: 100%;
-    font-size: 30px;
-    padding: 5px 0;
+  text-align: center;
+  width: 100%;
+  font-size: 30px;
+  padding: 5px 0;
 }

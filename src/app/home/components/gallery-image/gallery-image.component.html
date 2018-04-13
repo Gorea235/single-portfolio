@@ -1,14 +1,14 @@
 <mat-card class="img-container">
-    <div class="disp-img-container">
-        <img class="disp-img" [attr.src]="imageSrc" (click)="imgClicked($event)" />
-    </div>
-    <p class="txt-center" *ngIf="image.desc">{{ image.desc }}</p>
-    <p class="txt-center cats">
-        Categories:
-        <span *ngFor="let category of image.categories; let first = first">
-            <span *ngIf="!first">, </span>
-            <a class="cat-link" routerLink="/" [queryParams]="{q: 'cat:' + category.name}">{{ category.name }}</a>
-        </span>
-    </p>
-    <app-full-image *ngIf="showImgCloseUp" [image]="image" (onClose)="closeUpClosed($event)"></app-full-image>
+  <div class="disp-img-container">
+    <img class="disp-img" [attr.src]="imageSrc" (click)="imgClicked($event)" />
+  </div>
+  <p class="txt-center" *ngIf="image.desc">{{ image.desc }}</p>
+  <p class="txt-center cats">
+    Categories:
+    <span *ngFor="let category of image.categories; let first = first">
+      <span *ngIf="!first">, </span>
+      <a class="cat-link" routerLink="/" [queryParams]="{q: 'cat:' + category.name}">{{ category.name }}</a>
+    </span>
+  </p>
+  <app-full-image *ngIf="showImgCloseUp" [image]="image" (onClose)="closeUpClosed($event)"></app-full-image>
 </mat-card>

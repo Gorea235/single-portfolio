@@ -1,36 +1,32 @@
 .img-scroll {
-    overflow: hidden;
-    display: block;
+  overflow: hidden;
+  display: block;
 }
 
 .img-container {
-    width: 200%;
-    height: 100%;
-    clear: both;
-    position: relative;
-    display: block;
-    float: left;
-    left: 0;
-
-    -webkit-transition: left 1s;
-    -moz-transition: left 1s;
-    -o-transition: left 1s;
-    transition: left 1s;
+  width: 200%;
+  height: 100%;
+  clear: both;
+  position: relative;
+  display: block;
+  float: left;
+  left: 0;
+  transition: left 1s;
 }
 
 .img-item {
-    height: 100%;
-    width: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    float: left;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    display: block;
+  height: 100%;
+  width: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  float: left;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: block;
 }
 
 .img-item img {
-    visibility: hidden;
+  visibility: hidden;
 }

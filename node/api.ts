@@ -17,35 +17,35 @@ import { Search } from './api/search';
 import { RngImage } from './api/rng-image';
 
 export class ApiRouter {
-    private apiRoutes: ApiRoute[];
-    private router: Router;
+  private apiRoutes: ApiRoute[];
+  private router: Router;
 
-    constructor(
-        private autherService: AutherService,
-        private configService: ConfigService,
-        private galleryHelper: GalleryService,
-        private rngImageService: RngImageService,
-        private searchService: SearchService
-    ) { }
+  constructor(
+    private autherService: AutherService,
+    private configService: ConfigService,
+    private galleryHelper: GalleryService,
+    private rngImageService: RngImageService,
+    private searchService: SearchService
+  ) { }
 
-    public getRouter(): Router {
-        this.apiRoutes = [new Index];
-        this.router = Router();
+  public getRouter(): Router {
+    this.apiRoutes = [new Index];
+    this.router = Router();
 
-        // load routes
-        this.apiRoutes.push(new Auth(this.autherService));
-        this.apiRoutes.push(new Galleries(this.galleryHelper));
-        this.apiRoutes.push(new Config(this.configService));
-        this.apiRoutes.push(new Search(this.searchService));
-        this.apiRoutes.push(new RngImage(this.rngImageService));
+    // load routes
+    this.apiRoutes.push(new Auth(this.autherService));
+    this.apiRoutes.push(new Galleries(this.galleryHelper));
+    this.apiRoutes.push(new Config(this.configService));
+    this.apiRoutes.push(new Search(this.searchService));
+    this.apiRoutes.push(new RngImage(this.rngImageService));
 
-        // mount routes
-        this.apiRoutes.forEach(apiRoute => apiRoute.mountRoutes(this.router));
-        // final catch-all route for invalid API path
-        this.router.get('*', (req, res) => {
-            res.sendStatus(404);
-        });
+    // mount routes
+    this.apiRoutes.forEach(apiRoute => apiRoute.mountRoutes(this.router));
+    // final catch-all route for invalid API path
+    this.router.get('*', (req, res) => {
+      res.sendStatus(404);
+    });
 
-        return this.router;
-    }
+    return this.router;
+  }
 }

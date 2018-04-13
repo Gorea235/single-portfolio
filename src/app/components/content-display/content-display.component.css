@@ -1,18 +1,18 @@
 .container-split {
-    height: 100%;
+  height: 100%;
 }
 
 .container-img-left {
-    position: fixed;
-    left: 0;
+  position: fixed;
+  left: 0;
 }
 
 .container-img-right {
-    position: fixed;
-    right: 0;
+  position: fixed;
+  right: 0;
 }
 
 .container-content {
-    padding: 15px 10px;
-    margin-bottom: 48px;
+  padding: 15px 10px;
+  margin-bottom: 48px;
 }

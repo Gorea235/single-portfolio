@@ -1,18 +1,18 @@
 .item-card {
-    margin: 0 -16px;
-    padding-bottom: 55px;
+  margin: 0 -16px;
+  padding-bottom: 55px;
 }
 
 .gallery-header {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .gallery-desc {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .view-btn {
-    float: right;
-    padding-top: 3px;
-    padding-bottom: 3px;
+  float: right;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
