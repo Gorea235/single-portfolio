@@ -4,7 +4,7 @@ A portfolio website displaying galleries of images for a single person. The main
 The site also provides an admin section that can be used to edit all the galleries and general config.
 
 ## Docker
-The project also is hosted on [Docker](https://hub.docker.com/r/gorea235/single-portfolio/). The 'edge' tag is the latest commit from master, and each tag in the repo is mirrored exactly, with the 'latest' tag being the most recent tag.
+The project also is hosted on [Docker](https://hub.docker.com/r/gorea235/single-portfolio/). Each tag in the repo is mirrored exactly, with the 'latest' tag being the most recent tag.
 
 ## Development
 I'm making this mostly to learn a few new technologies, namely Angular 5 and Node.js. The basis of the project is a portfolio site for a friend.
