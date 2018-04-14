@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 
 @Component({
@@ -6,13 +6,15 @@ import { ConfigService } from '../../services/config.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   title: string;
 
   constructor(
     private configService: ConfigService
-  ) {
-    configService.getConfig(ConfigService.keyPortfolioTitle)
+  ) { }
+
+  ngOnInit(): void {
+    this.configService.getConfig(ConfigService.keyPortfolioTitle)
       .subscribe(cnf => {
         this.title = cnf.value;
       });

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { ConfigService } from '../../services/config.service';
   templateUrl: './contact-info.component.html',
   styleUrls: ['./contact-info.component.css']
 })
-export class ContactInfoComponent {
+export class ContactInfoComponent implements OnInit {
   @ViewChild('internalInfoContainer') internalInfoContainer: ElementRef;
   @Input() offset: number;
 
@@ -21,8 +21,10 @@ export class ContactInfoComponent {
 
   constructor(
     private configService: ConfigService
-  ) {
-    configService.getConfig(ConfigService.keyContactInfo)
+  ) { }
+
+  ngOnInit(): void {
+    this.configService.getConfig(ConfigService.keyContactInfo)
       .subscribe(cnf => {
         this.infoText = cnf.value.split('\n');
       });
