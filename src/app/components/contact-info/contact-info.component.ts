@@ -14,7 +14,7 @@ export class ContactInfoComponent implements OnInit {
     'Click to expand',
     'Click to shrink'
   ];
-  contactHelpText = 'Click to expand';
+  contactHelpText = this.contactHelpTexts[0];
   showInfo = false;
   infoHeight = 0;
   infoText: string[];
