@@ -158,14 +158,15 @@ WHERE 'GalleryID' = ? AND 'Id' = ?
 
   processImages(items: any, cb: (sqlErr: MysqlError, imgs: {}[]) => void, current?) {
     current = current || [];
-    this.processImage(items[0], (sqlErrProc, img) => {
-      if (sqlErrProc) cb(sqlErrProc, null);
-      else {
-        current.push(img);
-        if (items.length > 1) this.processImages(items.slice(1), cb, current);
-        else cb(null, current);
-      }
-    });
+    if (items.length > 0) {
+      this.processImage(items[0], (sqlErrProc, img) => {
+        if (sqlErrProc) cb(sqlErrProc, null);
+        else {
+          current.push(img);
+          this.processImages(items.slice(1), cb, current);
+        }
+      });
+    } else cb(null, current);
   }
 
   verifyGalleryStructure(gallery: any): boolean {
