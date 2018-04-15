@@ -18,6 +18,7 @@ import { SearchService } from './services/search.service';
 import { ImageHelperService } from './services/image-helper.service';
 import { AuthService } from './services/auth.service';
 import { ConfigService } from './services/config.service';
+import { ImageKindService } from './services/image-kind.service';
 
 // guards
 import { AuthGuard } from './guards/auth.guard';
@@ -71,6 +72,7 @@ if (!environment.production)
     AuthService,
     ConfigService,
     AuthGuard,
+    ImageKindService,
   ],
   bootstrap: [AppComponent]
 })
