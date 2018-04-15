@@ -13,7 +13,7 @@ export class ConfigRoute implements ApiRoute {
   mountRoutes(router: Router) {
     router.get('/config', (req, res) => respondError(res, badRequest));
     router.get('/config/:key', (req, res) => this.getConfig(req, res));
-    router.post('/config/:key', (req, res) => this.setConfig(req, res));
+    router.put('/config/:key', (req, res) => this.setConfig(req, res));
   }
 
   private invalidRequest(res: Response) {

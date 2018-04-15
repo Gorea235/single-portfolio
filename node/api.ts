@@ -17,6 +17,7 @@ import { GalleriesRoute } from './api/galleries.route';
 import { ImageKindRoute } from './api/image-kind.route';
 import { RngImageRoute } from './api/rng-image.route';
 import { SearchRoute } from './api/search.route';
+import { respondError, notFound } from './errors';
 
 export class ApiRouter {
   private apiRoutes: ApiRoute[];
@@ -45,10 +46,12 @@ export class ApiRouter {
 
     // mount routes
     this.apiRoutes.forEach(apiRoute => apiRoute.mountRoutes(this.router));
-    // final catch-all route for invalid API path
-    this.router.get('*', (req, res) => {
-      res.sendStatus(404);
-    });
+    // final catch-all routes for invalid API path
+    this.router.get('*', (req, res) => respondError(res, notFound));
+    this.router.post('*', (req, res) => respondError(res, notFound));
+    this.router.patch('*', (req, res) => respondError(res, notFound));
+    this.router.put('*', (req, res) => respondError(res, notFound));
+    this.router.delete('*', (req, res) => respondError(res, notFound));
 
     return this.router;
   }

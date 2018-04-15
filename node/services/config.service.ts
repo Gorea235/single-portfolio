@@ -55,7 +55,7 @@ WHERE 'Key' = ?
           this.dbConn
             .query(
               this.sqlSetConfig,
-              [req.params.key, req.body.value],
+              [value, key],
               (sqlErr, results) => valid(sqlErr, null, results)
             );
         } else {
