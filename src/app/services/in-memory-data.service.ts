@@ -299,7 +299,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 0,
         name: 'gallery test',
-        desc: 'testing gallery 1',
+        desc: 'testing gallery 1\ndescription\nover\nmultiple\nlines',
         dateAdded: new Date().toISOString(),
         dateUpdated: new Date().toISOString(),
         images: [
