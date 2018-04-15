@@ -2,7 +2,9 @@
   <div class="disp-img-container">
     <img class="disp-img" [attr.src]="imageSrc" (click)="imgClicked($event)" />
   </div>
-  <p class="txt-center" *ngIf="image.desc">{{ image.desc }}</p>
+  <div *ngIf="image.desc">
+    <p class="txt-center" *ngFor="let line of image.desc | splitLines">{{ line }}</p>
+  </div>
   <p class="txt-center cats">
     Categories:
     <span *ngFor="let category of image.categories; let first = first">

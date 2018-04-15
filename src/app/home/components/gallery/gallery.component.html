@@ -6,7 +6,7 @@
   <mat-card class="mat-item-adjust">
     <div *ngIf="gallery.desc">
       <h2>Description</h2>
-      <p>{{ gallery.desc }}</p>
+      <p *ngFor="let line of gallery.desc | splitLines">{{ line }}</p>
     </div>
     <p>Added: {{ dateFormat(gallery.dateAdded) }}, Updated: {{ dateFormat(gallery.dateUpdated) }}</p>
   </mat-card>

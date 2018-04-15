@@ -305,7 +305,7 @@ export class InMemoryDataService implements InMemoryDbService {
         images: [
           {
             id: 0,
-            desc: 'first image',
+            desc: 'first image\nwith\nmultiline\ndescription',
             dateTaken: new Date().toISOString(),
             imageData: 'https://picsum.photos/300?random?rng=' + Math.random(),
             galleryId: 0,

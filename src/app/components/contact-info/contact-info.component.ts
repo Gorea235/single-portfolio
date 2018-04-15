@@ -1,5 +1,6 @@
 import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ConfigService } from '../../services/config.service';
+import { ConfigModel } from '../../models/config.model';
 
 @Component({
   selector: 'app-contact-info',
@@ -17,7 +18,7 @@ export class ContactInfoComponent implements OnInit {
   contactHelpText = this.contactHelpTexts[0];
   showInfo = false;
   infoHeight = 0;
-  infoText: string[];
+  contactInfo: ConfigModel;
 
   constructor(
     private configService: ConfigService
@@ -26,7 +27,7 @@ export class ContactInfoComponent implements OnInit {
   ngOnInit(): void {
     this.configService.getConfig(ConfigService.keyContactInfo)
       .subscribe(cnf => {
-        this.infoText = cnf.value.split('\n');
+        this.contactInfo = cnf;
       });
   }
 
