@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
-import { IteratorPipe } from './iterator.pipe';
+import { IteratorPipe } from './pipes/iterator.pipe';
+import { SplitLinesPipe } from './pipes/split-lines.pipe';
 
 const pipes = [
-  IteratorPipe
+  IteratorPipe,
+  SplitLinesPipe
 ];
 
 @NgModule({
