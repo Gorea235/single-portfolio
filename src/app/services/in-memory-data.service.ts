@@ -34,6 +34,15 @@ export class InMemoryDataService implements InMemoryDbService {
     }
   }
 
+  put(reqInfo: RequestInfo): Observable<any> {
+    switch (reqInfo.collectionName) {
+      case 'config':
+        return this.putConfig(reqInfo);
+      default:
+        return undefined;
+    }
+  }
+
   private getAuth(reqInfo: RequestInfo): Observable<any> {
     return reqInfo.utils.createResponse$(() => {
       const config: { key: string, value: string }[] = reqInfo.utils.getDb()['config'];
@@ -120,8 +129,6 @@ export class InMemoryDataService implements InMemoryDbService {
       const config: ConfigModel[] = reqInfo.utils.getDb()['config'];
       let body: ConfigModel;
 
-      console.log(reqInfo);
-      console.log(config);
       config.forEach(element => {
         if (element.key === reqInfo.id)
           body = element;
@@ -131,6 +138,24 @@ export class InMemoryDataService implements InMemoryDbService {
         body: reqInfo.utils.getConfig().dataEncapsulation ?
           { body } : body,
         status: STATUS.OK
+      }, reqInfo);
+    });
+  }
+
+  private putConfig(reqInfo: RequestInfo): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const config: ConfigModel[] = reqInfo.utils.getDb()['config'];
+
+      let updated = false;
+      config.forEach(element => {
+        if (element.key === reqInfo.id) {
+          element.value = reqInfo.utils.getJsonBody(reqInfo.req).value;
+          updated = true;
+        }
+      });
+
+      return this.finishOptions({
+        status: updated ? STATUS.OK : STATUS.NOT_FOUND
       }, reqInfo);
     });
   }

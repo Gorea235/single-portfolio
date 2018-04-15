@@ -1,0 +1,17 @@
+<mat-card>
+  <form (ngSubmit)="updateTitle()">
+    <mat-form-field class="item-full">
+      <input matInput placeholder="Title" required type="text" [(ngModel)]="title.value" id="title-edit" name="title" />
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="!title.key">Update Title</button>
+  </form>
+</mat-card>
+<mat-card class="next-item">
+  <form (ngSubmit)="updateContactInfo()">
+    <mat-form-field class="item-full">
+      <textarea matInput placeholder="Contact Info" required rows="5" [(ngModel)]="contactInfo.value" id="contact-info-edit" name="contact-info"></textarea>
+    </mat-form-field>
+    <button mat-raised-button type="submit" [disabled]="!contactInfo.key">Update Contact Info</button>
+  </form>
+</mat-card>
+<button class="next-item item-full" mat-raised-button (click)="openNewGalleryDialog($event)">New Gallery</button>

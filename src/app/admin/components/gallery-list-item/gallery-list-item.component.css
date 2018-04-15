@@ -1,0 +1,11 @@
+.gallery-name {
+  display: inline;
+}
+
+.alter-button {
+  float: right;
+}
+
+.alter-button:not(:first-child) {
+  margin-right: 5px;
+}

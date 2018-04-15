@@ -1,0 +1,7 @@
+<mat-card class="main-container">
+  <mat-list role="list">
+    <mat-list-item class="list-item" role="listitem" *ngFor="let gallery of galleries">
+      <app-gallery-list-item class="gallery-item" [gallery]="gallery" (onGalleryUpdated)="onSingleGalleryUpdated()"></app-gallery-list-item>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

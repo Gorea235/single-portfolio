@@ -1,0 +1,5 @@
+<mat-card>
+  <h2 class="gallery-name">{{ gallery.name }}</h2>
+  <a mat-raised-button routerLink="/admin/{{ gallery.id }}" class="alter-button">Edit</a>
+  <button mat-raised-button color="warn" (click)="onDeleteClick($event)" class="alter-button">Delete</button>
+</mat-card>
