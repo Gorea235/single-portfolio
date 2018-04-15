@@ -25,7 +25,8 @@ export class GalleryComponent implements OnInit {
         .subscribe(gallery => {
           this.gallery = gallery;
         }, err => {
-          console.error(`Error, ${err.body.error}: ${err.body.message}`);
+          const errObj = err.body || err.error;
+          console.error(`Error, ${errObj.error}: ${errObj.message}`);
           switch (err.status) {
             case 404:
               this.error = 'Gallery was not found';
