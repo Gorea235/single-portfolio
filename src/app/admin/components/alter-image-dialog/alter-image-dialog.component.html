@@ -19,5 +19,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!data.imageData || !validDate">{{ data.id ? 'Create' : 'Update' }}</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!data.imageData || !validDate">{{ data.id ? 'Update' : 'Create' }}</button>
 </div>
