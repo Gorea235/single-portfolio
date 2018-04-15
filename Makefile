@@ -17,11 +17,14 @@ OUT=build/
 NG_OUT=$(OUT)ng/
 NODE_OUT=$(OUT)node/
 FULL_OUT=$(OUT)out/
+FULL_OUT_NG=$(FULL_OUT)content/
 
 # full build
 release: ng node clean
 	mkdir -p $(FULL_OUT)
-	cp -Rf $(NG_OUT)* $(NODE_OUT)* $(FULL_OUT)
+	mkdir -p $(FULL_OUT_NG)
+	cp -Rf $(NODE_OUT)* $(FULL_OUT)
+	cp -Rf $(NG_OUT)* $(FULL_OUT_NG)
 
 # debug node build
 debug: node

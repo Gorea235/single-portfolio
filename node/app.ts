@@ -19,6 +19,8 @@ import { SearchService } from './services/search.service';
 import { ImageKindService } from './services/image-kind.service';
 
 class App {
+  private staticDir = 'content';
+
   private express: Express;
   private server: Server;
   private debug: debug.IDebugger;
@@ -60,7 +62,7 @@ class App {
     this.express.use(json());
     this.express.use(urlencoded({ extended: true }));
     this.express.use(cookieParser());
-    this.express.use(express.static(join(__dirname)));
+    this.express.use(express.static(join(__dirname, this.staticDir)));
   }
 
   private initPort() {
@@ -113,7 +115,7 @@ class App {
 
     // angular routes
     this.express.use('*', (req, res) => {
-      res.sendFile(join(__dirname, 'index.html'));
+      res.sendFile(join(__dirname, this.staticDir, 'index.html'));
     });
   }
 
