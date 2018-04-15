@@ -1,12 +1,12 @@
 <div class="footer-container" [style.left.px]="offset" [style.right.px]="offset" (click)="footerClicked()">
   <footer>
-    <div class="header">
+    <div class="header item-full-width">
       <h3>Contact Info</h3>
     </div>
     <div class="internal-info" [style.height.px]="infoHeight" #internalInfoContainer>
       <p *ngFor="let line of infoText">{{ line }}</p>
     </div>
-    <div class="help-info">
+    <div class="help-info item-full-width">
       <p class="click-info mat-caption">{{ contactHelpText }}</p>
       <a class="source-txt" href="https://github.com/Gorea235/single-portfolio">Site Source</a>
     </div>

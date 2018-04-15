@@ -1,13 +1,13 @@
 <mat-card>
   <form (ngSubmit)="doLogin()">
-    <mat-form-field class="item-full">
+    <mat-form-field class="item-full-width">
       <input matInput placeholder="Password" type="password" [(ngModel)]="password" name="password">
     </mat-form-field>
-    <div class="error-box" [style.height.px]="errorHeight" #errorCard>
-      <mat-card>
+    <div class="error-box-container" [style.height.px]="errorHeight" #errorCard>
+      <mat-card class="error-box">
         <p>Password was incorrect</p>
       </mat-card>
     </div>
-    <button mat-raised-button type="submit" class="login-button">Login</button>
+    <button mat-raised-button type="submit" class="mat-item-adjust">Login</button>
   </form>
 </mat-card>

@@ -11,3 +11,29 @@ html,
 body {
   margin: 0;
 }
+
+.mat-list-item {
+  width: 100%;
+  height: fit-content !important;
+}
+
+.mat-list-item:not(:first-child) {
+  margin-top: 8px;
+}
+
+.mat-item-adjust {
+  margin-top: 8px !important;
+}
+
+.mat-nav-icon-button {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+
+.item-full-width {
+  width: 100%;
+}
+
+.error-box {
+  background-color: #f29191;
+}

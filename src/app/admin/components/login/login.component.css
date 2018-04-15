@@ -1,16 +1,4 @@
-.item-full {
-  width: 100%;
-}
-
-.error-box {
+.error-box-container {
   overflow: hidden;
   transition: height 0.2s;
-}
-
-.error-box mat-card {
-  background-color: #f29191;
-}
-
-.login-button {
-  margin-top: 8px;
 }
