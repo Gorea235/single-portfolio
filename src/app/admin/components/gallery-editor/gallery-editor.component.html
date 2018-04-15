@@ -1,0 +1,12 @@
+<mat-card>
+  <form (ngSubmit)="updateGallery()">
+    <mat-form-field class="item-full-width">
+      <input matInput placeholder="Name" required type="text" [(ngModel)]="gallery.name" id="name-edit" name="name" />
+    </mat-form-field>
+    <mat-form-field class="item-full-width">
+      <textarea matInput placeholder="Description" required rows="5" [(ngModel)]="gallery.desc" id="desc-edit" name="desc"></textarea>
+    </mat-form-field>
+    <button mat-raised-button type="submit">Update Gallery Info</button>
+  </form>
+</mat-card>
+<button class="mat-item-adjust item-full-width" mat-raised-button (click)="openNewImageDialog($event)">New Image</button>

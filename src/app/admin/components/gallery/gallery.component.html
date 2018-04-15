@@ -1,1 +1,8 @@
-<h1>admin gallery page</h1>
+<mat-card class="error-box" *ngIf="error">{{ error }}</mat-card>
+<mat-card *ngIf="gallery">
+  <app-gallery-editor [gallery]="gallery" (onGalleryUpdated)="onGalleryUpdated()"></app-gallery-editor>
+  <app-gallery-image *ngFor="let img of gallery.images" [image]="img" [gallery]="gallery" (onGalleryUpdated)="onGalleryUpdated()"></app-gallery-image>
+</mat-card>
+<a class="mat-nav-icon-button mat-item-adjust" mat-raised-button routerLink="/admin">
+  <mat-icon>arrow_back_ios</mat-icon> Back to admin
+</a>

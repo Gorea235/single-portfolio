@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ data.id ? 'Update Image' : 'Create New Image' }}</h1>
+<div mat-dialog-content>
+  <mat-form-field class="input-data">
+    <input matInput required placeholder="Image Data" [(ngModel)]="data.imageData" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.imageKind.id">
+      <mat-option *ngFor="let imageKind of imageKinds | async" [value]="imageKind.id">{{ imageKind.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="item-full-width">
+    <textarea matInput rows="5" placeholder="Description" [(ngModel)]="data.desc"></textarea>
+  </mat-form-field>
+  <mat-form-field class="item-full-width">
+    <input matInput required [matDatepicker]="dateTaken" placeholder="Date Taken" (dataChange)="dateUpdated($event)" [(ngModel)]="data.dateTaken">
+    <mat-datepicker-toggle matSuffix [for]="dateTaken"></mat-datepicker-toggle>
+    <mat-datepicker #dateTaken></mat-datepicker>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data" [disabled]="!data.imageData || !validDate">{{ data.id ? 'Create' : 'Update' }}</button>
+</div>

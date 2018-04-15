@@ -1,0 +1,16 @@
+.disp-img {
+  max-height: 600px;
+  max-width: 100%;
+}
+
+.img-controls {
+  height: 36px;
+}
+
+.alter-button {
+  float: right;
+}
+
+.alter-button:not(:first-child) {
+  margin-right: 5px;
+}

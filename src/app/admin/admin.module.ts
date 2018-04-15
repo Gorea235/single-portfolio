@@ -59,7 +59,8 @@ const moduleRoutes: Routes = [
   ],
   entryComponents: [
     NewGalleryDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AlterImageDialogComponent
   ]
 })
 export class AdminModule { }
