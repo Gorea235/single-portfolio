@@ -46,7 +46,7 @@ export class GalleryImageComponent implements OnChanges {
               if (status === 200 || status === 204) {
                 this.image = result;
                 this.updateImage();
-              } else alert('Unable to delete image');
+              } else alert('Unable to update image');
             });
         }
       });
