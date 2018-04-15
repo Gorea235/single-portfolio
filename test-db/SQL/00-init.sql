@@ -95,29 +95,29 @@ INSERT INTO `Galleries` (`Name`, `Desc`, `DateAdded`, `DateUpdated`)
 VALUES ('gallery 5', 'testing gallery 5', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
 
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (1, 0, 'image 1', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (1, 0, 'image 1', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=1');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (1, 0, 'image 2', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (1, 0, 'image 2', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=2');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (1, 0, 'image 3', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (1, 0, 'image 3', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=3');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (2, 0, 'image 4', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (2, 0, 'image 4', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=4');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (2, 0, 'image 5', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (2, 0, 'image 5', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=5');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (3, 0, 'image 6', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (3, 0, 'image 6', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=6');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (3, 0, 'image 7', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (3, 0, 'image 7', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=7');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (4, 0, 'image 8', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (4, 0, 'image 8', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=8');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (4, 0, 'image 9', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (4, 0, 'image 9', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=9');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (5, 0, 'image 10', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (5, 0, 'image 10', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=10');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (5, 0, 'image 11', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (5, 0, 'image 11', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=11');
 INSERT INTO `GalleryImages` (`GalleryID`, `ImageKindID`, `Desc`, `DateTaken`, `ImageData`)
-VALUES (5, 0, 'image 12', '2018-04-04T20:12:00', '2018-04-04T20:12:00');
+VALUES (5, 0, 'image 12', '2018-04-04T20:12:00', 'https://picsum.photos/300?random?id=12');
 
 INSERT INTO `GalleryImageCategories` (`GalleryImageID`, `CategoryID`)
 VALUES (1, 1);
