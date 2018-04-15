@@ -55,7 +55,7 @@ class App {
   }
 
   private initExpress() {
-    const favPath = join(__dirname, 'favicon.ico');
+    const favPath = join(__dirname, this.staticDir, 'favicon.ico');
     if (existsSync(favPath))
       this.express.use(favicon(favPath));
     this.express.use(logger('dev'));
