@@ -22,10 +22,8 @@ export class LoginComponent {
   }
 
   doLogin(): void {
-    console.log(`logging in with ${this.password}`);
     this.authService.login(this.password)
       .subscribe(status => {
-        console.log(status);
         if (status === 200) this.router.navigate(['/admin']);
         else this.errorHeight = this.errorCardActualHeight;
       });
