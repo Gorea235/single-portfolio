@@ -13,6 +13,7 @@ import { ConfigModel } from '../models/config.model';
 @Injectable()
 export class InMemoryDataService implements InMemoryDbService {
   private adminPassword = 'default';
+  private galleryImagesRe = /^api\/galleries\/([0-9]+)\/images(?:\/([0-9]+)?)?$/;
 
   constructor(
     private cookieService: CookieService,
@@ -20,8 +21,9 @@ export class InMemoryDataService implements InMemoryDbService {
   ) { }
 
   get(reqInfo: RequestInfo): Observable<any> {
-    if (reqInfo.url.startsWith('api/galleries/') && reqInfo.url.endsWith('/images'))
-      return this.getImages(reqInfo);
+    const imgUrlMatch = reqInfo.url.match(this.galleryImagesRe);
+    if (imgUrlMatch)
+      return this.getImages(reqInfo, imgUrlMatch);
     switch (reqInfo.collectionName) {
       case 'auth':
         return this.getAuth(reqInfo);
@@ -37,12 +39,22 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   post(reqInfo: RequestInfo): Observable<any> {
+    const imgUrlMatch = reqInfo.url.match(this.galleryImagesRe);
+    if (imgUrlMatch)
+      return this.createImage(reqInfo, imgUrlMatch);
     switch (reqInfo.collectionName) {
       case 'auth':
         return this.postAuth(reqInfo);
       default:
         return undefined;
     }
+  }
+
+  patch(reqInfo: RequestInfo): Observable<any> {
+    const imgUrlMatch = reqInfo.url.match(this.galleryImagesRe);
+    if (imgUrlMatch)
+      return this.updateImage(reqInfo, imgUrlMatch);
+    return undefined;
   }
 
   put(reqInfo: RequestInfo): Observable<any> {
@@ -52,6 +64,13 @@ export class InMemoryDataService implements InMemoryDbService {
       default:
         return undefined;
     }
+  }
+
+  delete(reqInfo: RequestInfo): Observable<any> {
+    const imgUrlMatch = reqInfo.url.match(this.galleryImagesRe);
+    if (imgUrlMatch)
+      return this.deleteImage(reqInfo, imgUrlMatch);
+    return undefined;
   }
 
   private getAuth(reqInfo: RequestInfo): Observable<any> {
@@ -138,14 +157,61 @@ export class InMemoryDataService implements InMemoryDbService {
     });
   }
 
-  private getImages(reqInfo: RequestInfo): Observable<any> {
+  private getImages(reqInfo: RequestInfo, matches: RegExpMatchArray): Observable<any> {
     return reqInfo.utils.createResponse$(() => {
       const galleries: GalleryModel[] = reqInfo.utils.getDb()['galleries'];
-      const body: GalleryImageModel[] = reqInfo.utils.findById(galleries, reqInfo.id).images;
+
+      const images: GalleryImageModel[] = reqInfo.utils.findById(galleries, reqInfo.id).images;
+      let body: any = images;
+      if (matches[2]) body = reqInfo.utils.findById(images, matches[2]);
 
       return this.finishOptions({
         body: reqInfo.utils.getConfig().dataEncapsulation ?
           { body } : body,
+        status: STATUS.OK
+      }, reqInfo);
+    });
+  }
+
+  private createImage(reqInfo: RequestInfo, matches: RegExpMatchArray): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const galleries: GalleryModel[] = reqInfo.utils.getDb()['galleries'];
+      const images: GalleryImageModel[] = reqInfo.utils.findById(galleries, reqInfo.id).images;
+
+      const id = images[images.length - 1].id + 1;
+      const reqBody = reqInfo.utils.getJsonBody(reqInfo.req);
+      reqBody.id = id;
+      images.push(reqBody);
+
+      return this.finishOptions({
+        status: STATUS.OK
+      }, reqInfo);
+    });
+  }
+
+  private updateImage(reqInfo: RequestInfo, matches: RegExpMatchArray): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const galleries: GalleryModel[] = reqInfo.utils.getDb()['galleries'];
+      const images: GalleryImageModel[] = reqInfo.utils.findById(galleries, reqInfo.id).images;
+
+      const reqBody = reqInfo.utils.getJsonBody(reqInfo.req);
+      images[matches[2]] = reqBody;
+
+      return this.finishOptions({
+        status: STATUS.OK
+      }, reqInfo);
+    });
+  }
+
+  private deleteImage(reqInfo: RequestInfo, matches: RegExpMatchArray): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const galleries: GalleryModel[] = reqInfo.utils.getDb()['galleries'];
+      const images: GalleryImageModel[] = reqInfo.utils.findById(galleries, reqInfo.id).images;
+
+      const searchId = parseInt(matches[2], 10);
+      images.splice(images.findIndex(img => img.id === searchId), 1);
+
+      return this.finishOptions({
         status: STATUS.OK
       }, reqInfo);
     });
