@@ -10,8 +10,8 @@ import { GalleryService } from '../../../services/gallery.service';
   styleUrls: ['./gallery-list-item.component.css']
 })
 export class GalleryListItemComponent {
-  @Output() onGalleryUpdated: EventEmitter<any> = new EventEmitter<any>();
   @Input() gallery: GalleryModel;
+  @Output() onGalleryUpdated: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private galleryService: GalleryService,
