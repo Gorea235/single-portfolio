@@ -37,36 +37,44 @@ OR 'Categories'.'desc' LIKE ?
 `);
   // full search over all possible fields
   private sqlFullSearch = sqlPrimer(`
--- gallery search
-${this.sqlGallerySearch}
-UNION
--- gallery image search
-${this.sqlGalleryImageSearch}
-UNION
--- full category search
-${this.sqlGalleryImageFullCategorySearch}
+SELECT 'id', 'name', 'desc', 'dateAdded', 'dateUpdated'
+FROM
+(
+  -- gallery search
+  ${this.sqlGallerySearch}
+  UNION
+  -- gallery image search
+  ${this.sqlGalleryImageSearch}
+  UNION
+  -- full category search
+  ${this.sqlGalleryImageFullCategorySearch}
+) SEARCH_RESULTS
+`);
+  // gallery ordering
+  private sqlGallerySearchOrder = sqlPrimer(`
+ORDER BY 'dateUpdated' DESC
 `);
 
   private searches = {
     'gallery:': {
-      sql: this.sqlGallerySearch,
+      sql: this.sqlGallerySearch + this.sqlGallerySearchOrder,
       times: 2
     },
     'image:': {
-      sql: this.sqlGalleryImageSearch,
+      sql: this.sqlGalleryImageSearch + this.sqlGallerySearchOrder,
       times: 1
     },
     'category:': {
-      sql: this.sqlGalleryImageCategorySearch,
+      sql: this.sqlGalleryImageCategorySearch + this.sqlGallerySearchOrder,
       times: 1
     },
     'cat:': {
-      sql: this.sqlGalleryImageCategorySearch,
+      sql: this.sqlGalleryImageCategorySearch + this.sqlGallerySearchOrder,
       times: 1
     }
   };
   private defaultSearch = {
-    sql: this.sqlFullSearch,
+    sql: this.sqlFullSearch + this.sqlGallerySearchOrder,
     times: 5
   };
 
