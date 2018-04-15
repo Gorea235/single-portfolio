@@ -34,6 +34,7 @@ export class ConfigService {
         this.httpHelperService.respOps
       )
       .pipe(
+        this.httpHelperService.statusError,
         this.httpHelperService.statusSwitch
       );
   }

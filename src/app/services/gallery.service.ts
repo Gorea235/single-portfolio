@@ -85,6 +85,7 @@ export class GalleryService {
         this.httpHelperService.respOps
       )
       .pipe(
+        this.httpHelperService.statusError,
         this.httpHelperService.statusSwitch
       );
   }
@@ -101,6 +102,7 @@ export class GalleryService {
         this.httpHelperService.respOps
       )
       .pipe(
+        this.httpHelperService.statusError,
         this.httpHelperService.statusSwitch
       );
   }
@@ -119,6 +121,7 @@ export class GalleryService {
         this.httpHelperService.respOps
       )
       .pipe(
+        this.httpHelperService.statusError,
         this.httpHelperService.statusSwitch
       );
   }
@@ -135,6 +138,7 @@ export class GalleryService {
         this.httpHelperService.respOps
       )
       .pipe(
+        this.httpHelperService.statusError,
         this.httpHelperService.statusSwitch
       );
   }
@@ -152,6 +156,7 @@ export class GalleryService {
         this.httpHelperService.respOps
       )
       .pipe(
+        this.httpHelperService.statusError,
         this.httpHelperService.statusSwitch
       );
   }
@@ -167,6 +172,7 @@ export class GalleryService {
         this.httpHelperService.respOps
       )
       .pipe(
+        this.httpHelperService.statusError,
         this.httpHelperService.statusSwitch
       );
   }

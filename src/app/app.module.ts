@@ -19,6 +19,9 @@ import { ImageHelperService } from './services/image-helper.service';
 import { AuthService } from './services/auth.service';
 import { ConfigService } from './services/config.service';
 
+// guards
+import { AuthGuard } from './guards/auth.guard';
+
 // components
 import { AppComponent } from './components/app/app.component';
 import { ContentDisplayComponent } from './components/content-display/content-display.component';
@@ -67,6 +70,7 @@ if (!environment.production)
     ImageHelperService,
     AuthService,
     ConfigService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

@@ -23,12 +23,23 @@ export class InMemoryDataService implements InMemoryDbService {
     if (reqInfo.url.startsWith('api/galleries/') && reqInfo.url.endsWith('/images'))
       return this.getImages(reqInfo);
     switch (reqInfo.collectionName) {
+      case 'auth':
+        return this.getAuth(reqInfo);
       case 'rng-image':
         return this.getRngImage(reqInfo);
       case 'search':
         return this.getSearch(reqInfo);
       case 'config':
         return this.getConfig(reqInfo);
+      default:
+        return undefined;
+    }
+  }
+
+  post(reqInfo: RequestInfo): Observable<any> {
+    switch (reqInfo.collectionName) {
+      case 'auth':
+        return this.postAuth(reqInfo);
       default:
         return undefined;
     }
@@ -51,15 +62,31 @@ export class InMemoryDataService implements InMemoryDbService {
       switch (reqInfo.id) {
         case 'check':
           status =
-            config[0].value !== '' && this.cookieService.get(this.httpHelperService.cookieLoginToken) === config[0].value ?
+            config[0].value !== '' &&
+              this.cookieService.get(this.httpHelperService.cookieLoginToken) === config[0].value ?
               STATUS.OK : STATUS.BAD_REQUEST;
           break;
+      }
+
+      return this.finishOptions({
+        status: status
+      }, reqInfo);
+    });
+  }
+
+  private postAuth(reqInfo): Observable<any> {
+    return reqInfo.utils.createResponse$(() => {
+      const config: { key: string, value: string }[] = reqInfo.utils.getDb()['config'];
+      let status: number;
+
+      switch (reqInfo.id) {
         case 'login':
           const reqBody = reqInfo.utils.getJsonBody(reqInfo.req);
           if (reqBody.password && reqBody.password === this.adminPassword) {
             const token = Math.random().toString();
             config[0].value = token;
             reqInfo.headers.set('Cookie', `token=${token}`);
+            this.cookieService.set(this.httpHelperService.cookieLoginToken, token);
             status = STATUS.OK;
           } else
             status = STATUS.BAD_REQUEST;

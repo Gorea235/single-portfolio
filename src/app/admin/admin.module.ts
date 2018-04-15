@@ -4,9 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppMatsModule } from '../app-mats.module';
 import { AppPipesModule } from '../app-pipes.module';
+import { AuthGuard } from '../guards/auth.guard';
 
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminEditorComponent } from './components/admin-editor/admin-editor.component';
+import { LoginComponent } from './components/login/login.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { GalleryEditorComponent } from './components/gallery-editor/gallery-editor.component';
 import { GalleryImageComponent } from './components/gallery-image/gallery-image.component';
@@ -19,10 +21,16 @@ import { AlterImageDialogComponent } from './components/alter-image-dialog/alter
 const moduleRoutes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     component: AdminComponent
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: ':galleryId',
+    canActivate: [AuthGuard],
     component: GalleryComponent
   }
 ];
@@ -39,6 +47,7 @@ const moduleRoutes: Routes = [
   declarations: [
     AdminComponent,
     AdminEditorComponent,
+    LoginComponent,
     GalleryComponent,
     GalleryEditorComponent,
     GalleryImageComponent,
