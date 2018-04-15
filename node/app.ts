@@ -16,6 +16,7 @@ import { ConfigService } from './services/config.service';
 import { GalleryService } from './services/gallery.service';
 import { RngImageService } from './services/rng-image.service';
 import { SearchService } from './services/search.service';
+import { ImageKindService } from './services/image-kind.service';
 
 class App {
   private express: Express;
@@ -29,6 +30,7 @@ class App {
   private autherService: AutherService;
   private configService: ConfigService;
   private galleryService: GalleryService;
+  private imageKindService: ImageKindService;
   private rngImageService: RngImageService;
   private searchService: SearchService;
 
@@ -92,6 +94,7 @@ class App {
     this.autherService = new AutherService(this.dbConn);
     this.configService = new ConfigService(this.autherService, this.dbConn);
     this.galleryService = new GalleryService(this.autherService, this.dbConn);
+    this.imageKindService = new ImageKindService(this.dbConn);
     this.rngImageService = new RngImageService(this.galleryService, this.dbConn);
     this.searchService = new SearchService(this.dbConn);
   }
@@ -102,6 +105,7 @@ class App {
       this.autherService,
       this.configService,
       this.galleryService,
+      this.imageKindService,
       this.rngImageService,
       this.searchService
     );

@@ -6,15 +6,17 @@ import { Connection } from 'mysql';
 import { AutherService } from './services/auther.service';
 import { ConfigService } from './services/config.service';
 import { GalleryService } from './services/gallery.service';
+import { ImageKindService } from './services/image-kind.service';
 import { RngImageService } from './services/rng-image.service';
 import { SearchService } from './services/search.service';
 
 // API imports
 import { Auth } from './api/auth';
-import { Galleries } from './api/galleries';
 import { Config } from './api/config';
-import { Search } from './api/search';
+import { Galleries } from './api/galleries';
+import { ImageKind } from './api/image-kind';
 import { RngImage } from './api/rng-image';
+import { Search } from './api/search';
 
 export class ApiRouter {
   private apiRoutes: ApiRoute[];
@@ -24,6 +26,7 @@ export class ApiRouter {
     private autherService: AutherService,
     private configService: ConfigService,
     private galleryHelper: GalleryService,
+    private imageKindService: ImageKindService,
     private rngImageService: RngImageService,
     private searchService: SearchService
   ) { }
@@ -34,10 +37,11 @@ export class ApiRouter {
 
     // load routes
     this.apiRoutes.push(new Auth(this.autherService));
-    this.apiRoutes.push(new Galleries(this.galleryHelper));
     this.apiRoutes.push(new Config(this.configService));
-    this.apiRoutes.push(new Search(this.searchService));
+    this.apiRoutes.push(new Galleries(this.galleryHelper));
+    this.apiRoutes.push(new ImageKind(this.imageKindService));
     this.apiRoutes.push(new RngImage(this.rngImageService));
+    this.apiRoutes.push(new Search(this.searchService));
 
     // mount routes
     this.apiRoutes.forEach(apiRoute => apiRoute.mountRoutes(this.router));
