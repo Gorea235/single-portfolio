@@ -1,13 +1,13 @@
 <h1 mat-dialog-title>Create New Gallery</h1>
 <div mat-dialog-content>
-  <mat-form-field>
+  <mat-form-field class="item-full-width">
     <input matInput required placeholder="Name" [(ngModel)]="model.name" />
   </mat-form-field>
-  <mat-form-field>
-    <input matInput required placeholder="Description" [(ngModel)]="model.desc" />
+  <mat-form-field class="item-full-width">
+    <textarea matInput rows="5" placeholder="Description" [(ngModel)]="model.desc"></textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="model">Create</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="model" [disabled]="!model.name">Create</button>
 </div>
