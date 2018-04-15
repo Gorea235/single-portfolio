@@ -189,7 +189,7 @@ WHERE 'GalleryID' = ? AND 'Id' = ?
       !Date.parse(image.dateTaken) ||
       !image.imageData ||
       !image.imageKind ||
-      !image.imageKind.id
+      (!image.imageKind.id && image.imageKind.id !== 0)
     ) return false;
     else return true;
   }
@@ -366,7 +366,7 @@ WHERE 'GalleryID' = ? AND 'Id' = ?
       this.sqlGalleryExists,
       () => [galleryId],
       this.sqlImageCreate,
-      () => [galleryId, image.imageKind.id, image.desc || '', image.dateTaken, image.imageData],
+      () => [galleryId, image.imageKind.id, image.desc || '', new Date(image.dateTaken), image.imageData],
       (cbUp) => {
         // fetch the ID of the last inserted image so we can update the categories
         this.dbConn
@@ -417,7 +417,7 @@ WHERE 'GalleryID' = ? AND 'Id' = ?
       this.sqlImageExists,
       () => [galleryId, imageId],
       this.sqlImageUpdate,
-      () => [image.imageKind.id, image.desc, image.dateTaken, image.imageData, galleryId, imageId],
+      () => [image.imageKind.id, image.desc, new Date(image.dateTaken), image.imageData, galleryId, imageId],
       (cbUp) => this.updateCategories(imageId, image, cbUp),
       (sqlErr, err) => {
         if (sqlErr || err) cb(sqlErr, err);
