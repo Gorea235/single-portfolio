@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { ApiRoute } from './base';
+import { ApiRoute } from './base.route';
 import { ImageKindService } from '../services/image-kind.service';
 
-export class ImageKind implements ApiRoute {
+export class ImageKindRoute implements ApiRoute {
   constructor(
     private imageKindService: ImageKindService
   ) { }

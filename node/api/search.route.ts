@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import { ApiRoute } from './base';
+import { ApiRoute } from './base.route';
 import { SearchService } from '../services/search.service';
 
-export class Search implements ApiRoute {
+export class SearchRoute implements ApiRoute {
   constructor(
     private searchService: SearchService
   ) { }

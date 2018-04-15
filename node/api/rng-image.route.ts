@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
-import { ApiRoute } from './base';
+import { ApiRoute } from './base.route';
 import { GalleryService } from '../services/gallery.service';
 import { RngImageService } from '../services/rng-image.service';
 import { respondError, serverError } from '../errors';
 
-export class RngImage implements ApiRoute {
+export class RngImageRoute implements ApiRoute {
   constructor(
     private rngImageService: RngImageService
   ) { }

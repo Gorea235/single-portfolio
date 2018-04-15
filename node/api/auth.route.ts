@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
-import { ApiRoute } from './base';
+import { ApiRoute } from './base.route';
 import { AutherService } from '../services/auther.service';
 import { respondError, badRequest } from '../errors';
 
-export class Auth implements ApiRoute {
+export class AuthRoute implements ApiRoute {
   constructor(
     private autherService: AutherService
   ) { }

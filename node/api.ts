@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Index, ApiRoute } from './api/base';
+import { IndexRoute, ApiRoute } from './api/base.route';
 import { Connection } from 'mysql';
 
 // service imports
@@ -11,12 +11,12 @@ import { RngImageService } from './services/rng-image.service';
 import { SearchService } from './services/search.service';
 
 // API imports
-import { Auth } from './api/auth';
-import { Config } from './api/config';
-import { Galleries } from './api/galleries';
-import { ImageKind } from './api/image-kind';
-import { RngImage } from './api/rng-image';
-import { Search } from './api/search';
+import { AuthRoute } from './api/auth.route';
+import { ConfigRoute } from './api/config.route';
+import { GalleriesRoute } from './api/galleries.route';
+import { ImageKindRoute } from './api/image-kind.route';
+import { RngImageRoute } from './api/rng-image.route';
+import { SearchRoute } from './api/search.route';
 
 export class ApiRouter {
   private apiRoutes: ApiRoute[];
@@ -32,16 +32,16 @@ export class ApiRouter {
   ) { }
 
   public getRouter(): Router {
-    this.apiRoutes = [new Index];
+    this.apiRoutes = [new IndexRoute()];
     this.router = Router();
 
     // load routes
-    this.apiRoutes.push(new Auth(this.autherService));
-    this.apiRoutes.push(new Config(this.configService));
-    this.apiRoutes.push(new Galleries(this.galleryHelper));
-    this.apiRoutes.push(new ImageKind(this.imageKindService));
-    this.apiRoutes.push(new RngImage(this.rngImageService));
-    this.apiRoutes.push(new Search(this.searchService));
+    this.apiRoutes.push(new AuthRoute(this.autherService));
+    this.apiRoutes.push(new ConfigRoute(this.configService));
+    this.apiRoutes.push(new GalleriesRoute(this.galleryHelper));
+    this.apiRoutes.push(new ImageKindRoute(this.imageKindService));
+    this.apiRoutes.push(new RngImageRoute(this.rngImageService));
+    this.apiRoutes.push(new SearchRoute(this.searchService));
 
     // mount routes
     this.apiRoutes.forEach(apiRoute => apiRoute.mountRoutes(this.router));

@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
-import { ApiRoute } from './base';
+import { ApiRoute } from './base.route';
 import { Connection, MysqlError } from 'mysql';
 import { GalleryService } from '../services/gallery.service';
 import { ErrorData, respondError, notFound } from '../errors';
 
-export class Galleries implements ApiRoute {
+export class GalleriesRoute implements ApiRoute {
   constructor(
     private galleryHelper: GalleryService
   ) { }

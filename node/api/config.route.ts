@@ -1,11 +1,11 @@
 import { Router, Request, Response } from 'express';
-import { ApiRoute } from './base';
+import { ApiRoute } from './base.route';
 import { Connection } from 'mysql';
 import { AutherService } from '../services/auther.service';
 import { ConfigService } from '../services/config.service';
 import { respondError, badRequest, unauthorized } from '../errors';
 
-export class Config implements ApiRoute {
+export class ConfigRoute implements ApiRoute {
   constructor(
     private configService: ConfigService
   ) { }

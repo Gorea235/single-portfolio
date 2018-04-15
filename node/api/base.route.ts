@@ -10,7 +10,7 @@ export interface ApiRoute {
   mountRoutes(router: Router);
 }
 
-export class Index implements ApiRoute {
+export class IndexRoute implements ApiRoute {
   mountRoutes(router: Router) {
     router.get('/', (req, res) => respondError(res, badRequest));
   }
