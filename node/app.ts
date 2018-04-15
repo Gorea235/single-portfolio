@@ -9,6 +9,7 @@ import { json, urlencoded } from 'body-parser';
 import * as debug from 'debug';
 import { existsSync } from 'fs';
 import { createConnection, Connection } from 'mysql';
+import * as compression from 'compression';
 
 import { ApiRouter } from './api';
 import { AutherService } from './services/auther.service';
@@ -62,6 +63,7 @@ class App {
     this.express.use(json());
     this.express.use(urlencoded({ extended: true }));
     this.express.use(cookieParser());
+    this.express.use(compression());
     this.express.use(express.static(join(__dirname, this.staticDir)));
   }
 
