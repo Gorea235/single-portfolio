@@ -85,7 +85,7 @@ export class InMemoryDataService implements InMemoryDbService {
           if (reqBody.password && reqBody.password === this.adminPassword) {
             const token = Math.random().toString();
             config[0].value = token;
-            reqInfo.headers.set('Cookie', `token=${token}`);
+            reqInfo.headers.set('Cookie', `${this.httpHelperService.cookieLoginToken}=${token}`);
             this.cookieService.set(this.httpHelperService.cookieLoginToken, token);
             status = STATUS.OK;
           } else
