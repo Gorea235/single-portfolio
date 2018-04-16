@@ -2,12 +2,12 @@
   <div class="img-container" [class.img-container-offset]="!imgOnLeft">
     <a routerLink="/{{ imgLeft?.galleryId }}">
       <div class="img-item" [style.background-image]="'url(' + imgSrcLeft + ')'">
-        <img *ngIf="imgSrcLeft" [attr.src]="imgSrcLeft" (load)="imgLoad(true, $event)" />
+        <img *ngIf="imgSrcLeft" [attr.src]="imgSrcLeft" (load)="imgLoad(true, $event)" (error)="imgError($event)" />
       </div>
     </a>
     <a routerLink="/{{ imgRight?.galleryId }}">
       <div class="img-item" [style.background-image]="'url(' + imgSrcRight + ')'">
-        <img *ngIf="imgSrcRight" [attr.src]="imgSrcRight" (load)="imgLoad(false, $event)" />
+        <img *ngIf="imgSrcRight" [attr.src]="imgSrcRight" (load)="imgLoad(false, $event)" (error)="imgError($event)" />
       </div>
     </a>
   </div>

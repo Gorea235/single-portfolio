@@ -70,12 +70,21 @@ export class ImageScrollComponent implements OnInit, OnChanges, OnDestroy {
         this.imgLeft = img;
         this.imgSrcLeft = url;
       }
+    }, err => {
+      console.error('unable to fetch image, restarting timer');
+      this.startScrollTimer();
     });
   }
 
   imgLoad(fromLeft, event): void {
     if (fromLeft === this.imgOnLeft) return;
     this.imgOnLeft = !this.imgOnLeft;
+    this.startScrollTimer();
+  }
+
+  imgError(event): void {
+    console.error('failed to load image, restarting timer');
+    console.error(event);
     this.startScrollTimer();
   }
 }
