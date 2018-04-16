@@ -73,7 +73,8 @@ export class ImageScrollComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  imgLoad(event): void {
+  imgLoad(fromLeft, event): void {
+    if (fromLeft === this.imgOnLeft) return;
     this.imgOnLeft = !this.imgOnLeft;
     this.startScrollTimer();
   }
