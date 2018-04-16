@@ -1,8 +1,5 @@
-import { Component, Input, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { GalleryModel } from '../../../models/gallery.model';
-import { GalleryImageModel } from '../../../models/gallery-image.model';
-import { ImageHelperService } from '../../../services/image-helper.service';
 
 @Component({
   selector: 'app-gallery-item',
@@ -11,12 +8,4 @@ import { ImageHelperService } from '../../../services/image-helper.service';
 })
 export class GalleryItemComponent {
   @Input() gallery: GalleryModel;
-
-  constructor(
-    private router: Router
-  ) { }
-
-  onClick(event): void {
-    this.router.navigate([`${this.gallery.id}`]);
-  }
 }
