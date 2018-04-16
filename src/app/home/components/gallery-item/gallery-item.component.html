@@ -5,7 +5,7 @@
   <div class="gallery-desc">
     <p *ngFor="let line of gallery.desc | splitLines">{{ line }}</p>
   </div>
-  <a mat-raised-button routerLink="/{{ gallery.id }}" class="view-btn">
+  <a mat-raised-button color="accent" routerLink="/{{ gallery.id }}" class="view-btn">
     View Gallery
     <mat-icon>arrow_forward_ios</mat-icon>
   </a>
