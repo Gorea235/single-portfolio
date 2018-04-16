@@ -44,6 +44,6 @@ export class GalleryComponent implements OnInit {
 
   dateFormat(date: string): string {
     const d = new Date(date);
-    return `${d.getFullYear()}-${d.getMonth()}-${d.getDay()} ${d.getHours()}:${d.getMinutes()}`;
+    return d.toLocaleDateString();
   }
 }
