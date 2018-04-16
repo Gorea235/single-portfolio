@@ -3,6 +3,6 @@
   <app-gallery-editor [gallery]="gallery" (onGalleryUpdated)="onGalleryUpdated()"></app-gallery-editor>
   <app-gallery-image *ngFor="let img of gallery.images" [image]="img" [gallery]="gallery" (onGalleryUpdated)="onGalleryUpdated()"></app-gallery-image>
 </mat-card>
-<a class="mat-nav-icon-button mat-item-adjust" mat-raised-button routerLink="/admin">
+<a class="mat-nav-icon-button mat-item-adjust" mat-raised-button color="accent" routerLink="/admin">
   <mat-icon>arrow_back_ios</mat-icon> Back to admin
 </a>

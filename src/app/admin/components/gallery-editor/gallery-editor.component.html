@@ -6,7 +6,7 @@
     <mat-form-field class="item-full-width">
       <textarea matInput placeholder="Description" required rows="5" [(ngModel)]="gallery.desc" id="desc-edit" name="desc"></textarea>
     </mat-form-field>
-    <button mat-raised-button type="submit">Update Gallery Info</button>
+    <button mat-raised-button color="primary" type="submit">Update Gallery Info</button>
   </form>
 </mat-card>
-<button class="mat-item-adjust item-full-width" mat-raised-button (click)="openNewImageDialog($event)">New Image</button>
+<button class="mat-item-adjust item-full-width" mat-raised-button color="primary" (click)="openNewImageDialog($event)">New Image</button>
