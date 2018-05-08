@@ -58,7 +58,7 @@ export interface IGalleryService {
 }
 
 @injectable()
-export class GalleryService {
+export class GalleryService implements IGalleryService {
   // ==== Helper SQL strings ====
 
   // last insert ID
