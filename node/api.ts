@@ -3,6 +3,7 @@ import { injectable, inject } from 'inversify';
 // API imports
 import { AuthRoute } from './api/auth.route';
 import { ApiRoute, IndexRoute } from './api/base.route';
+import { CategoriesRoute } from './api/categories.route';
 import { ConfigRoute } from './api/config.route';
 import { GalleriesRoute } from './api/galleries.route';
 import { ImageKindRoute } from './api/image-kind.route';
@@ -19,6 +20,7 @@ export class ApiRouter {
   constructor(
     @inject(TYPES.IndexRoute) private indexRoute: IndexRoute,
     @inject(TYPES.AuthRoute) private authRoute: AuthRoute,
+    @inject(TYPES.CategoryRoute) private categoryRoute: CategoriesRoute,
     @inject(TYPES.ConfigRoute) private configRoute: ConfigRoute,
     @inject(TYPES.GalleriesRoute) private galleryRoute: GalleriesRoute,
     @inject(TYPES.ImageKindRoute) private imageKindRoute: ImageKindRoute,
@@ -32,6 +34,7 @@ export class ApiRouter {
 
     // load routes
     this.apiRoutes.push(this.authRoute);
+    this.apiRoutes.push(this.categoryRoute);
     this.apiRoutes.push(this.configRoute);
     this.apiRoutes.push(this.galleryRoute);
     this.apiRoutes.push(this.imageKindRoute);
