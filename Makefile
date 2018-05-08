@@ -3,7 +3,7 @@
 # env locations
 BIN=./node_modules/.bin
 PKG=package.json
-PKG_LOCK=package-lock.json
+LOCK=yarn.lock
 ETC=etc/
 
 # node locations
@@ -34,18 +34,18 @@ docker:
 
 # build prep
 prep:
-	npm install
+	yarn
 
 ng-prep: prep
 	mkdir -p $(NG_OUT)
 
 # node prerequisite task
 node-prep: prep
-	npm install --prefix $(NODE)
+	yarn --cwd $(NODE)
 	mkdir -p $(NODE_OUT)
 	cp -f $(NODE)$(PKG) $(NODE_OUT)$(PKG)
-	cp -f $(NODE)$(PKG_LOCK) $(NODE_OUT)$(PKG_LOCK)
-	npm install --production --prefix $(NODE_OUT)
+	cp -f $(NODE)$(LOCK) $(NODE_OUT)$(LOCK)
+	yarn --prod --cwd $(NODE_OUT)
 
 # angular
 ng: ng-prep
