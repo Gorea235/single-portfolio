@@ -19,6 +19,7 @@ import { ImageHelperService } from './services/image-helper.service';
 import { AuthService } from './services/auth.service';
 import { ConfigService } from './services/config.service';
 import { ImageKindService } from './services/image-kind.service';
+import { CategoryService } from './services/category.service';
 
 // guards
 import { AuthGuard } from './guards/auth.guard';
@@ -73,6 +74,7 @@ if (!environment.production)
     ConfigService,
     AuthGuard,
     ImageKindService,
+    CategoryService,
   ],
   bootstrap: [AppComponent]
 })

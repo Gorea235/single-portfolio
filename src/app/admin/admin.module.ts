@@ -17,6 +17,9 @@ import { GalleryListItemComponent } from './components/gallery-list-item/gallery
 import { NewGalleryDialogComponent } from './components/new-gallery-dialog/new-gallery-dialog.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { AlterImageDialogComponent } from './components/alter-image-dialog/alter-image-dialog.component';
+import { CategoryComponent } from './components/category/category.component';
+import { CategoryItemComponent } from './components/category-item/category-item.component';
+import { AlterCategoryDialogComponent } from './components/alter-category-dialog/alter-category-dialog.component';
 
 const moduleRoutes: Routes = [
   {
@@ -27,6 +30,11 @@ const moduleRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'categories',
+    canActivate: [AuthGuard],
+    component: CategoryComponent
   },
   {
     path: ':galleryId',
@@ -55,12 +63,16 @@ const moduleRoutes: Routes = [
     GalleryListItemComponent,
     NewGalleryDialogComponent,
     ConfirmDialogComponent,
-    AlterImageDialogComponent
+    AlterImageDialogComponent,
+    CategoryComponent,
+    CategoryItemComponent,
+    AlterCategoryDialogComponent
   ],
   entryComponents: [
     NewGalleryDialogComponent,
     ConfirmDialogComponent,
-    AlterImageDialogComponent
+    AlterImageDialogComponent,
+    AlterCategoryDialogComponent
   ]
 })
 export class AdminModule { }

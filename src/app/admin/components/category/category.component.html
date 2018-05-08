@@ -1,0 +1,12 @@
+<button class="mat-item-adjust item-full-width" mat-raised-button color="primary" (click)="openNewCategoryDialog($event)">
+  New Category</button>
+<mat-card class="mat-item-adjust">
+  <mat-list role="list">
+    <mat-list-item class="mat-list-item" role="listitem" *ngFor="let category of categories | async">
+      <app-category-item class="item-full-width" [category]="category" (onCategoryUpdated)="onSingleCategoryUpdated()"></app-category-item>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
+<a class="mat-nav-icon-button mat-item-adjust" mat-raised-button color="accent" routerLink="/admin">
+  <mat-icon>arrow_back_ios</mat-icon> Back to admin
+</a>

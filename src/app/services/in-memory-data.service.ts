@@ -269,27 +269,27 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const categories: CategoryModel[] = [
       {
-        id: 0,
+        id: 1,
         name: 'category0',
         desc: 'first category'
       },
       {
-        id: 1,
+        id: 2,
         name: 'category1',
         desc: 'first category'
       },
       {
-        id: 2,
+        id: 3,
         name: 'category2',
         desc: 'first category'
       },
       {
-        id: 3,
+        id: 4,
         name: 'category3',
         desc: 'first category'
       },
       {
-        id: 4,
+        id: 5,
         name: 'category4',
         desc: 'first category'
       }
@@ -499,7 +499,8 @@ export class InMemoryDataService implements InMemoryDbService {
     return {
       galleries,
       config,
-      'image-kinds': imageKinds
+      'image-kinds': imageKinds,
+      categories
     };
   }
 

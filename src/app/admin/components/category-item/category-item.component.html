@@ -1,0 +1,7 @@
+<mat-card>
+  <h2 class="category-name">{{ category.name }}</h2>
+  <div class="cat-controls">
+    <button mat-raised-button color="accent" (click)="onEditClick($event)" class="alter-button">Edit</button>
+    <button mat-raised-button color="warn" (click)="onDeleteClick($event)" class="alter-button">Delete</button>
+  </div>
+</mat-card>
