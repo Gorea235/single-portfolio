@@ -1,10 +1,13 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response, Router } from 'express';
+import { inject, injectable } from 'inversify';
+import { ISearchService } from '../services/search.service';
+import TYPES from '../types';
 import { ApiRoute } from './base.route';
-import { SearchService } from '../services/search.service';
 
+@injectable()
 export class SearchRoute implements ApiRoute {
   constructor(
-    private searchService: SearchService
+    @inject(TYPES.ISearchService) private searchService: ISearchService
   ) { }
 
   mountRoutes(router: Router) {

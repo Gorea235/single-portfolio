@@ -1,10 +1,13 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response, Router } from 'express';
+import { inject, injectable } from 'inversify';
+import { IImageKindService } from '../services/image-kind.service';
+import TYPES from '../types';
 import { ApiRoute } from './base.route';
-import { ImageKindService } from '../services/image-kind.service';
 
+@injectable()
 export class ImageKindRoute implements ApiRoute {
   constructor(
-    private imageKindService: ImageKindService
+    @inject(TYPES.IImageKindService) private imageKindService: IImageKindService
   ) { }
 
   mountRoutes(router: Router) {

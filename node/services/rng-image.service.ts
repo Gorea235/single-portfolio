@@ -1,8 +1,15 @@
+import { inject, injectable } from 'inversify';
+import { Connection, MysqlError } from 'mysql';
+import TYPES from '../types';
 import { sqlPrimer } from './base.service';
-import { GalleryService } from './gallery.service';
-import { MysqlError, Connection } from 'mysql';
+import { IGalleryService } from './gallery.service';
 
-export class RngImageService {
+export interface IRngImageService {
+  rngImage(cb: (sqlErr: MysqlError, image: {}) => void): void;
+}
+
+@injectable()
+export class RngImageService implements IRngImageService {
   private sqlRngSelector = sqlPrimer(`
 SELECT 'GalleryImages'.'id', 'GalleryImages'.'galleryId'
 FROM 'GalleryImages'
@@ -16,8 +23,8 @@ WHERE 'GalleryImages'.'id' IN
 `);
 
   constructor(
-    private galleryService: GalleryService,
-    private dbConn: Connection
+    @inject(TYPES.IGalleryService) private galleryService: IGalleryService,
+    @inject(TYPES.Connection) private dbConn: Connection
   ) { }
 
   rngImage(cb: (sqlErr: MysqlError, image: {}) => void): void {

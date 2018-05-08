@@ -1,17 +1,24 @@
+import { inject, injectable } from 'inversify';
 import { Connection, MysqlError } from 'mysql';
+import TYPES from '../types';
 import { sqlPrimer } from './base.service';
 
-export class ImageKindService {
+export interface IImageKindService {
+  listImageKinds(cb: (sqlErr: MysqlError, results: any) => void): void;
+}
+
+@injectable()
+export class ImageKindService implements IImageKindService {
   private sqlListImageKinds = sqlPrimer(`
 SELECT 'id', 'name', 'desc'
 FROM 'ImageKind'
 `);
 
   constructor(
-    private dbConn: Connection
+    @inject(TYPES.Connection) private dbConn: Connection
   ) { }
 
-  public listImageKinds(cb: (sqlErr: MysqlError, results: any) => void) {
+  listImageKinds(cb: (sqlErr: MysqlError, results: any) => void): void {
     this.dbConn
       .query(
         this.sqlListImageKinds,

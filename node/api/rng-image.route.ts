@@ -1,12 +1,14 @@
-import { Router, Request, Response } from 'express';
-import { ApiRoute } from './base.route';
-import { GalleryService } from '../services/gallery.service';
-import { RngImageService } from '../services/rng-image.service';
+import { Request, Response, Router } from 'express';
+import { inject, injectable } from 'inversify';
 import { respondError, serverError } from '../errors';
+import { IRngImageService } from '../services/rng-image.service';
+import TYPES from '../types';
+import { ApiRoute } from './base.route';
 
+@injectable()
 export class RngImageRoute implements ApiRoute {
   constructor(
-    private rngImageService: RngImageService
+    @inject(TYPES.IRngImageService) private rngImageService: IRngImageService
   ) { }
 
   mountRoutes(router: Router) {

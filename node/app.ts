@@ -1,23 +1,19 @@
-import { createServer, Server } from 'http';
+import { json, urlencoded } from 'body-parser';
+import * as compression from 'compression';
+import * as cookieParser from 'cookie-parser';
+import * as debug from 'debug';
 import * as express from 'express';
 import { Express } from 'express-serve-static-core';
+import { existsSync } from 'fs';
+import { Server, createServer } from 'http';
+import { Container } from 'inversify';
+import 'reflect-metadata';
+import * as logger from 'morgan';
 import { join } from 'path';
 import * as favicon from 'serve-favicon';
-import * as logger from 'morgan';
-import * as cookieParser from 'cookie-parser';
-import { json, urlencoded } from 'body-parser';
-import * as debug from 'debug';
-import { existsSync } from 'fs';
-import { createConnection, Connection } from 'mysql';
-import * as compression from 'compression';
-
 import { ApiRouter } from './api';
-import { AutherService } from './services/auther.service';
-import { ConfigService } from './services/config.service';
-import { GalleryService } from './services/gallery.service';
-import { RngImageService } from './services/rng-image.service';
-import { SearchService } from './services/search.service';
-import { ImageKindService } from './services/image-kind.service';
+import { configureServices } from './inversify.config';
+
 
 class App {
   private staticDir = 'content';
@@ -26,24 +22,15 @@ class App {
   private server: Server;
   private debug: debug.IDebugger;
   private port: number;
-  private dbConn: Connection;
   private apiRouter: ApiRouter;
-
-  // services
-  private autherService: AutherService;
-  private configService: ConfigService;
-  private galleryService: GalleryService;
-  private imageKindService: ImageKindService;
-  private rngImageService: RngImageService;
-  private searchService: SearchService;
+  private container: Container;
 
   constructor() {
     this.express = express();
     this.debug = debug('express-example:server');
     this.initExpress();
     this.initPort();
-    this.initDbConn();
-    this.initServices();
+    this.configureServices();
     this.initRouting();
   }
 
@@ -81,38 +68,13 @@ class App {
     return null;
   }
 
-  private initDbConn() {
-    // takes values from env var
-    // if they aren't defined, the defaults are used
-    // (the defaults are for the docker dev DB)
-    this.dbConn = createConnection({
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT, 10) || 3316,
-      user: process.env.DB_USER || 'default',
-      password: process.env.DB_PWORD || 'default',
-      database: process.env.DB_DB || 'dev'
-    });
-  }
-
-  private initServices() {
-    this.autherService = new AutherService(this.dbConn);
-    this.configService = new ConfigService(this.autherService, this.dbConn);
-    this.galleryService = new GalleryService(this.autherService, this.dbConn);
-    this.imageKindService = new ImageKindService(this.dbConn);
-    this.rngImageService = new RngImageService(this.galleryService, this.dbConn);
-    this.searchService = new SearchService(this.dbConn);
+  private configureServices() {
+    this.container = configureServices();
   }
 
   private initRouting() {
     // api routes
-    this.apiRouter = new ApiRouter(
-      this.autherService,
-      this.configService,
-      this.galleryService,
-      this.imageKindService,
-      this.rngImageService,
-      this.searchService
-    );
+    this.apiRouter = this.container.get<ApiRouter>(ApiRouter);
     this.express.use('/api', this.apiRouter.getRouter());
 
     // angular routes

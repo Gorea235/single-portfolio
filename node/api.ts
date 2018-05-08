@@ -1,48 +1,42 @@
 import { Router } from 'express';
-import { IndexRoute, ApiRoute } from './api/base.route';
-import { Connection } from 'mysql';
-
-// service imports
-import { AutherService } from './services/auther.service';
-import { ConfigService } from './services/config.service';
-import { GalleryService } from './services/gallery.service';
-import { ImageKindService } from './services/image-kind.service';
-import { RngImageService } from './services/rng-image.service';
-import { SearchService } from './services/search.service';
-
+import { injectable, inject } from 'inversify';
 // API imports
 import { AuthRoute } from './api/auth.route';
+import { ApiRoute, IndexRoute } from './api/base.route';
 import { ConfigRoute } from './api/config.route';
 import { GalleriesRoute } from './api/galleries.route';
 import { ImageKindRoute } from './api/image-kind.route';
 import { RngImageRoute } from './api/rng-image.route';
 import { SearchRoute } from './api/search.route';
-import { respondError, notFound } from './errors';
+import { notFound, respondError } from './errors';
+import TYPES from './types';
 
+@injectable()
 export class ApiRouter {
   private apiRoutes: ApiRoute[];
   private router: Router;
 
   constructor(
-    private autherService: AutherService,
-    private configService: ConfigService,
-    private galleryHelper: GalleryService,
-    private imageKindService: ImageKindService,
-    private rngImageService: RngImageService,
-    private searchService: SearchService
+    @inject(TYPES.IndexRoute) private indexRoute: IndexRoute,
+    @inject(TYPES.AuthRoute) private authRoute: AuthRoute,
+    @inject(TYPES.ConfigRoute) private configRoute: ConfigRoute,
+    @inject(TYPES.GalleriesRoute) private galleryRoute: GalleriesRoute,
+    @inject(TYPES.ImageKindRoute) private imageKindRoute: ImageKindRoute,
+    @inject(TYPES.RngImageRoute) private rngImageRoute: RngImageRoute,
+    @inject(TYPES.SearchRoute) private searchRoute: SearchRoute
   ) { }
 
   public getRouter(): Router {
-    this.apiRoutes = [new IndexRoute()];
+    this.apiRoutes = [this.indexRoute];
     this.router = Router();
 
     // load routes
-    this.apiRoutes.push(new AuthRoute(this.autherService));
-    this.apiRoutes.push(new ConfigRoute(this.configService));
-    this.apiRoutes.push(new GalleriesRoute(this.galleryHelper));
-    this.apiRoutes.push(new ImageKindRoute(this.imageKindService));
-    this.apiRoutes.push(new RngImageRoute(this.rngImageService));
-    this.apiRoutes.push(new SearchRoute(this.searchService));
+    this.apiRoutes.push(this.authRoute);
+    this.apiRoutes.push(this.configRoute);
+    this.apiRoutes.push(this.galleryRoute);
+    this.apiRoutes.push(this.imageKindRoute);
+    this.apiRoutes.push(this.rngImageRoute);
+    this.apiRoutes.push(this.searchRoute);
 
     // mount routes
     this.apiRoutes.forEach(apiRoute => apiRoute.mountRoutes(this.router));

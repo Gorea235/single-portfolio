@@ -1,9 +1,63 @@
-import { sqlPrimer } from './base.service';
+import { Request } from 'express';
+import { inject, injectable } from 'inversify';
 import { Connection, MysqlError } from 'mysql';
 import { ErrorData, badRequest, notFound, unauthorized } from '../errors';
-import { AutherService } from './auther.service';
-import { Request } from 'express';
+import TYPES from '../types';
+import { IAutherService } from './auther.service';
+import { sqlPrimer } from './base.service';
 
+export interface IGalleryService {
+  processImage(data: any, cb: (sqlErr: MysqlError, img: {}) => void): void;
+  processImages(items: any, cb: (sqlErr: MysqlError, imgs: {}[]) => void, current?): void;
+  verifyGalleryStructure(gallery: any): boolean;
+  verifyImageStructure(image: any): boolean;
+  updateCategories(
+    imageId: number,
+    img: { categories: { id: number }[] },
+    cb: (sqlErr: MysqlError, err: ErrorData) => void
+  ): void;
+  listGalleries(cb: (sqlErr: MysqlError, results: any) => void): void;
+  getGallery(galleryId: number, cb: (sqlErr: MysqlError, results: any) => void): void;
+  listImages(galleryId: number, cb: (sqlErr: MysqlError, results: any) => void): void;
+  getImage(galleryId: number, imageId: number, cb: (sqlErr: MysqlError, results: any) => void): void;
+  createGallery(
+    req: Request,
+    gallery: any,
+    cb: (sqlErr: MysqlError, err: ErrorData) => void
+  ): void;
+  createImage(
+    req: Request,
+    galleryId: number,
+    image: any,
+    cb: (sqlErr: MysqlError, err: ErrorData) => void
+  ): void;
+  updateGallery(
+    req: Request,
+    galleryId: number,
+    gallery: any,
+    cb: (sqlErr: MysqlError, err: ErrorData) => void
+  ): void;
+  updateImage(
+    req: Request,
+    galleryId: number,
+    imageId: number,
+    image: any,
+    cb: (sqlErr: MysqlError, err: ErrorData) => void
+  ): void;
+  deleteGallery(
+    req: Request,
+    galleryId: number,
+    cb: (sqlErr: MysqlError, err: ErrorData) => void
+  ): void;
+  deleteImage(
+    req: Request,
+    galleryId: number,
+    imageId: number,
+    cb: (sqlErr: MysqlError, err: ErrorData) => void
+  ): void;
+}
+
+@injectable()
 export class GalleryService {
   // ==== Helper SQL strings ====
 
@@ -127,8 +181,8 @@ WHERE 'GalleryID' = ? AND 'Id' = ?
 `);
 
   constructor(
-    private autherService: AutherService,
-    private dbConn: Connection
+    @inject(TYPES.IAutherService) private autherService: IAutherService,
+    @inject(TYPES.Connection) private dbConn: Connection
   ) { }
 
   // ==== helper methods ====
@@ -156,7 +210,7 @@ WHERE 'GalleryID' = ? AND 'Id' = ?
       );
   }
 
-  processImages(items: any, cb: (sqlErr: MysqlError, imgs: {}[]) => void, current?) {
+  processImages(items: any, cb: (sqlErr: MysqlError, imgs: {}[]) => void, current?): void {
     current = current || [];
     if (items.length > 0) {
       this.processImage(items[0], (sqlErrProc, img) => {

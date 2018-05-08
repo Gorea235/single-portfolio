@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { Connection } from 'mysql';
-import { respondError, badRequest } from '../errors';
+import { injectable } from 'inversify';
+import { badRequest, respondError } from '../errors';
 
 export interface ApiRoute {
   /**
@@ -10,6 +10,7 @@ export interface ApiRoute {
   mountRoutes(router: Router);
 }
 
+@injectable()
 export class IndexRoute implements ApiRoute {
   mountRoutes(router: Router) {
     router.get('/', (req, res) => respondError(res, badRequest));

@@ -1,9 +1,17 @@
-import { Connection } from 'mysql';
-import { Request, Response } from 'express';
 import { randomBytes } from 'crypto';
+import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import { Connection } from 'mysql';
+import TYPES from '../types';
 import { sqlPrimer } from './base.service';
 
-export class AutherService {
+export interface IAutherService {
+  isLoggedIn(req: Request, cb: (loggedIn: boolean) => void): void;
+  doLogin(req: Request, res: Response, cb: (success: boolean) => void): void;
+}
+
+@injectable()
+export class AutherService implements IAutherService {
   private loginTokenKey = 'login_token';
   private cookieTokenName = 'token';
   private sqlLoginTokenGet = sqlPrimer(`
@@ -17,14 +25,14 @@ INSERT INTO 'Config' ('Key', 'Value') VALUES (?, ?)
 `);
 
   constructor(
-    private dbConn: Connection
+    @inject(TYPES.Connection) private dbConn: Connection
   ) { }
 
   private get currentPassword() {
     return process.env.PASSWORD || 'admin'; // return ENV var or default
   }
 
-  public isLoggedIn(req: Request, cb: (loggedIn: boolean) => void) {
+  isLoggedIn(req: Request, cb: (loggedIn: boolean) => void): void {
     if (req.cookies[this.cookieTokenName]) {
       this.dbConn
         .query(
@@ -42,7 +50,7 @@ INSERT INTO 'Config' ('Key', 'Value') VALUES (?, ?)
     } else cb(false);
   }
 
-  public doLogin(req: Request, res: Response, cb: (success: boolean) => void) {
+  doLogin(req: Request, res: Response, cb: (success: boolean) => void): void {
     if (req.body.password === this.currentPassword) {
       randomBytes(256, (rngErr, buf) => {
         if (rngErr) throw rngErr;

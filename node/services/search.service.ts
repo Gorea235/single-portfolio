@@ -1,7 +1,14 @@
+import { inject, injectable } from 'inversify';
 import { Connection, MysqlError } from 'mysql';
+import TYPES from '../types';
 import { sqlPrimer } from './base.service';
 
-export class SearchService {
+export interface ISearchService {
+  search(term: string, cb: (sqlErr: MysqlError, results: any) => void): void;
+}
+
+@injectable()
+export class SearchService implements ISearchService {
   // gallery search SQL
   // searches 'name' and 'desc' columns
   private sqlGallerySearch = sqlPrimer(`
@@ -79,7 +86,7 @@ ORDER BY 'dateUpdated' DESC
   };
 
   constructor(
-    private dbConn: Connection
+    @inject(TYPES.Connection) private dbConn: Connection
   ) { }
 
   search(term: string, cb: (sqlErr: MysqlError, results: any) => void): void {

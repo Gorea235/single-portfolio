@@ -1,13 +1,14 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response, Router } from 'express';
+import { inject, injectable } from 'inversify';
+import { badRequest, respondError, unauthorized } from '../errors';
+import { IConfigService } from '../services/config.service';
+import TYPES from '../types';
 import { ApiRoute } from './base.route';
-import { Connection } from 'mysql';
-import { AutherService } from '../services/auther.service';
-import { ConfigService } from '../services/config.service';
-import { respondError, badRequest, unauthorized } from '../errors';
 
+@injectable()
 export class ConfigRoute implements ApiRoute {
   constructor(
-    private configService: ConfigService
+    @inject(TYPES.IConfigService) private configService: IConfigService
   ) { }
 
   mountRoutes(router: Router) {

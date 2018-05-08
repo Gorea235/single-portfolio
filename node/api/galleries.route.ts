@@ -1,12 +1,15 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response, Router } from 'express';
+import { inject, injectable } from 'inversify';
+import { MysqlError } from 'mysql';
+import { ErrorData, notFound, respondError } from '../errors';
+import { IGalleryService } from '../services/gallery.service';
+import TYPES from '../types';
 import { ApiRoute } from './base.route';
-import { Connection, MysqlError } from 'mysql';
-import { GalleryService } from '../services/gallery.service';
-import { ErrorData, respondError, notFound } from '../errors';
 
+@injectable()
 export class GalleriesRoute implements ApiRoute {
   constructor(
-    private galleryHelper: GalleryService
+    @inject(TYPES.IGalleryService) private galleryHelper: IGalleryService
   ) { }
 
   mountRoutes(router: Router) {

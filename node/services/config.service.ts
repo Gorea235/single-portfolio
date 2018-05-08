@@ -1,10 +1,20 @@
-import { sqlPrimer } from './base.service';
-import { Connection, MysqlError } from 'mysql';
-import { AutherService } from './auther.service';
 import { Request } from 'express';
+import { inject, injectable } from 'inversify';
+import { Connection, MysqlError } from 'mysql';
 import { ErrorData, unauthorized } from '../errors';
+import TYPES from '../types';
+import { IAutherService } from './auther.service';
+import { sqlPrimer } from './base.service';
 
-export class ConfigService {
+export interface IConfigService {
+  validKey(key: string): boolean;
+  getConfig(key: string, valid: (sqlErr: MysqlError, results) => void, invalid: () => void): void;
+  setConfig(key: string, value: string, req: Request,
+    valid: (sqlErr: MysqlError, err: ErrorData, results) => void, invalid: () => void): void;
+}
+
+@injectable()
+export class ConfigService implements IConfigService {
   // whitelist config values
   // using whitelist instead of blacklist for security
   private allowedConfigs = [
@@ -26,8 +36,8 @@ WHERE 'Key' = ?
 `);
 
   constructor(
-    private auther: AutherService,
-    private dbConn: Connection
+    @inject(TYPES.IAutherService) private auther: IAutherService,
+    @inject(TYPES.Connection) private dbConn: Connection
   ) { }
 
   validKey(key: string): boolean {

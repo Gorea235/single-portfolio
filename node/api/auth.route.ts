@@ -1,11 +1,14 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response, Router } from 'express';
+import { inject, injectable } from 'inversify';
+import { badRequest, respondError } from '../errors';
+import { IAutherService } from '../services/auther.service';
+import TYPES from '../types';
 import { ApiRoute } from './base.route';
-import { AutherService } from '../services/auther.service';
-import { respondError, badRequest } from '../errors';
 
+@injectable()
 export class AuthRoute implements ApiRoute {
   constructor(
-    private autherService: AutherService
+    @inject(TYPES.IAutherService) private autherService: IAutherService
   ) { }
 
   mountRoutes(router: Router) {
