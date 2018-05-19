@@ -1,30 +1,28 @@
 # Builds the angular webserver
 
 # env locations
-BIN=./node_modules/.bin
-PKG=package.json
-LOCK=yarn.lock
-ETC=etc/
+BIN?=./node_modules/.bin
+PKG?=package.json
+LOCK?=yarn.lock
+ETC?=etc/
 
 # node locations
-NODE=node/
-NODE_M=node_modules/
-NODE_CONF=$(NODE)tsconfig.node.json
+NODE?=node/
+NODE_M?=node_modules/
+NODE_CONF?=$(NODE)tsconfig.node.json
 
 # output locations
-DIST=dist/
-OUT=build/
-NG_OUT=$(OUT)ng/
-NODE_OUT=$(OUT)node/
-FULL_OUT=$(OUT)out/
-FULL_OUT_NG=$(FULL_OUT)content/
+DIST?=dist/
+OUT?=build/
+NG_OUT?=$(OUT)ng/
+NODE_OUT?=$(OUT)node/
+FULL_OUT?=$(OUT)out/
+FULL_OUT_NG?=$(FULL_OUT)content/
 
 # full build
-release: ng node clean
-	mkdir -p $(FULL_OUT)
-	mkdir -p $(FULL_OUT_NG)
-	cp -Rf $(NODE_OUT)* $(FULL_OUT)
-	cp -Rf $(NG_OUT)* $(FULL_OUT_NG)
+release: ng-prep node-prep release-build
+
+release-build: ng node clean merge
 
 # debug node build
 debug: node
@@ -48,12 +46,19 @@ node-prep: prep
 	yarn --prod --cwd $(NODE_OUT)
 
 # angular
-ng: ng-prep
+ng:
 	$(BIN)/ng build -prod -op $(NG_OUT)
 
-node: node-prep
+.PHONY: node
+node:
 	mkdir -p $(NODE_OUT)
 	$(BIN)/tsc -p $(NODE_CONF) --outDir $(NODE_OUT)
+
+merge:
+	mkdir -p $(FULL_OUT)
+	mkdir -p $(FULL_OUT_NG)
+	cp -Rf $(NODE_OUT)* $(FULL_OUT)
+	cp -Rf $(NG_OUT)* $(FULL_OUT_NG)
 
 clear: clean
 	rm -Rf $(OUT) $(DIST)
