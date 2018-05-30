@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { injectable, inject } from 'inversify';
+import { inject, injectable } from 'inversify';
 // API imports
 import { AuthRoute } from './api/auth.route';
 import { ApiRoute, IndexRoute } from './api/base.route';
