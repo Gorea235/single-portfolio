@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDatepickerInputEvent } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDatepickerInputEvent, MatDialogRef } from '@angular/material';
+import { Observable } from 'rxjs';
 import { GalleryImageModel } from '../../../models/gallery-image.model';
-import { Observable } from 'rxjs/Observable';
 import { ImageKindModel } from '../../../models/image-kind.model';
 import { ImageKindService } from '../../../services/image-kind.service';
 

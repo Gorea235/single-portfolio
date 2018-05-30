@@ -47,7 +47,7 @@ node-prep: prep
 
 # angular
 ng:
-	$(BIN)/ng build -prod -op $(NG_OUT)
+	$(BIN)/ng build --aot --prod --output-path $(NG_OUT)
 
 .PHONY: node
 node:

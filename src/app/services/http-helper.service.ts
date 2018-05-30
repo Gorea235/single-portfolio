@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { switchMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class HttpHelperService {

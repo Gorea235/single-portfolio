@@ -1,11 +1,11 @@
-import { Component, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
-import { GalleryImageModel } from '../../../models/gallery-image.model';
-import { ImageHelperService } from '../../../services/image-helper.service';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { GalleryService } from '../../../services/gallery.service';
+import { GalleryImageModel } from '../../../models/gallery-image.model';
 import { GalleryModel } from '../../../models/gallery.model';
+import { GalleryService } from '../../../services/gallery.service';
+import { ImageHelperService } from '../../../services/image-helper.service';
 import { AlterImageDialogComponent } from '../alter-image-dialog/alter-image-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-gallery-image',

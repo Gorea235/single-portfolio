@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { GalleryImageModel } from '../models/gallery-image.model';
 
 @Injectable()

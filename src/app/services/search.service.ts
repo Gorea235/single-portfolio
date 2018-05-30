@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { GalleryModel } from '../models/gallery.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { GalleryModel } from '../models/gallery.model';
 
 @Injectable()
 export class SearchService {

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHelperService } from './http-helper.service';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { CategoryModel } from '../models/category.model';
+import { HttpHelperService } from './http-helper.service';
 
 @Injectable()
 export class CategoryService {

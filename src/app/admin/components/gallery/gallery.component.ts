@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GalleryService } from '../../../services/gallery.service';
 import { GalleryModel } from '../../../models/gallery.model';
+import { GalleryService } from '../../../services/gallery.service';
 
 @Component({
   selector: 'app-gallery',

@@ -1,6 +1,6 @@
-import { Component, Input, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { ConfigService } from '../../services/config.service';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ConfigModel } from '../../models/config.model';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-contact-info',

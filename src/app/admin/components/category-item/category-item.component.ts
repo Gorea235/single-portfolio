@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { CategoryModel } from '../../../models/category.model';
 import { CategoryService } from '../../../services/category.service';
-import { MatDialog } from '@angular/material';
 import { AlterCategoryDialogComponent } from '../alter-category-dialog/alter-category-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 

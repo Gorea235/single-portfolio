@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { ImageHelperService } from '../../../services/image-helper.service';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { GalleryImageModel } from '../../../models/gallery-image.model';
+import { ImageHelperService } from '../../../services/image-helper.service';
 
 @Component({
   selector: 'app-full-image',

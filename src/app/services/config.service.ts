@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { HttpHelperService } from './http-helper.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ConfigModel } from '../models/config.model';
+import { HttpHelperService } from './http-helper.service';
 
 @Injectable()
 export class ConfigService {

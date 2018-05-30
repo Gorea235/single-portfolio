@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ConfigService } from '../../../services/config.service';
 import { ConfigModel } from '../../../models/config.model';
-import { NewGalleryDialogComponent } from '../new-gallery-dialog/new-gallery-dialog.component';
 import { GalleryModel } from '../../../models/gallery.model';
+import { ConfigService } from '../../../services/config.service';
 import { GalleryService } from '../../../services/gallery.service';
+import { NewGalleryDialogComponent } from '../new-gallery-dialog/new-gallery-dialog.component';
 
 @Component({
   selector: 'app-admin-editor',

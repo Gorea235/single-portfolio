@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { GalleryService } from '../../../services/gallery.service';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { GalleryModel } from '../../../models/gallery.model';
+import { GalleryService } from '../../../services/gallery.service';
 
 @Component({
   selector: 'app-gallery-list',

@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { HttpHelperService } from './http-helper.service';
-import { switchMap, catchError } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
+import { HttpHelperService } from './http-helper.service';
 
 @Injectable()
 export class AuthService {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../../services/category.service';
 import { MatDialog } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { CategoryModel } from '../../../models/category.model';
+import { CategoryService } from '../../../services/category.service';
 import { AlterCategoryDialogComponent } from '../alter-category-dialog/alter-category-dialog.component';
 
 @Component({

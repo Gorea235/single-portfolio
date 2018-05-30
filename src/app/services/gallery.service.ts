@@ -1,11 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { GalleryModel } from '../models/gallery.model';
-import { GalleryImageModel } from '../models/gallery-image.model';
-import { HttpHelperService } from './http-helper.service';
+import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
+import { GalleryImageModel } from '../models/gallery-image.model';
+import { GalleryModel } from '../models/gallery.model';
+import { HttpHelperService } from './http-helper.service';
 
 @Injectable()
 export class GalleryService {

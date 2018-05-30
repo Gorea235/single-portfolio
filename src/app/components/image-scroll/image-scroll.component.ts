@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, OnDestroy, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import { ImageSelectorService } from '../../services/image-selector.service';
-import { ImageHelperService } from '../../services/image-helper.service';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { GalleryImageModel } from '../../models/gallery-image.model';
+import { ImageHelperService } from '../../services/image-helper.service';
+import { ImageSelectorService } from '../../services/image-selector.service';
 
 @Component({
   selector: 'app-image-scroll',

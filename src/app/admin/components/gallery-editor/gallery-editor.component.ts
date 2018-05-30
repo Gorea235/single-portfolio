@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { GalleryModel } from '../../../models/gallery.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { AlterImageDialogComponent } from '../alter-image-dialog/alter-image-dialog.component';
-import { GalleryService } from '../../../services/gallery.service';
 import { GalleryImageModel } from '../../../models/gallery-image.model';
+import { GalleryModel } from '../../../models/gallery.model';
+import { GalleryService } from '../../../services/gallery.service';
+import { AlterImageDialogComponent } from '../alter-image-dialog/alter-image-dialog.component';
 
 @Component({
   selector: 'app-gallery-editor',

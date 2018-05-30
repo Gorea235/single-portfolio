@@ -1,9 +1,9 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, switchMap, distinctUntilChanged } from 'rxjs/operators';
-import { SearchService } from '../../../services/search.service';
-import { GalleryModel } from '../../../models/gallery.model';
 import { ActivatedRoute } from '@angular/router';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { GalleryModel } from '../../../models/gallery.model';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-search-bar',
